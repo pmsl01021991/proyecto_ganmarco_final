@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clínica IA Dental</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/indice.css">
+  <link rel="stylesheet" href="css/buscador.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/toast.css">
+  <link rel="stylesheet" href="css/asistente.css">
+  <link rel="stylesheet" href="css/microfotografias.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script src="js/app.js" defer></script>
+</head>
+
+<body>
+  <div class="app">
+
+    <nav class="topbar">
+      <div class="brand">
+          <img src="Logo_Proyect.png" alt="MicrosGeop">
+      </div>
+
+      <div class="status-pill">
+        <i class="fa-solid fa-circle"></i>
+        Sistema activo
+      </div>
+    </nav>
+
+    <header class="hero">
+        <img src="WhatsApp Image 2026-06-15 at 7.24.25 PM.jpeg"
+            alt="Microscopía petrográfica"
+            class="hero-image">
+    </header>
+
+    <section class="stats">
+      <div class="stat-card">
+        <i class="fa-solid fa-user-check"></i>
+        <div>
+          <h3>Paciente</h3>
+          <p>Datos personales</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <i class="fa-solid fa-notes-medical"></i>
+        <div>
+          <h3>Historia</h3>
+          <p>Registro clínico</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <i class="fa-solid fa-robot"></i>
+        <div>
+          <h3>IA</h3>
+          <p>Dictado inteligente</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="card buscador">
+        <h2>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Buscar Informe
+        </h2>
+
+        <div class="busqueda-box">
+            <input
+                type="text"
+                id="dniBusqueda"
+                placeholder="Ingrese el nombre del informe"
+            >
+
+            <button id="btnBuscar">
+                Buscar
+            </button>
+        </div>
+    </div>
+
+    <main id="formularioClinico" class="layout">
+
+      <div class="left-column">
+
+        <section class="card indice">
+            <h2>
+                <i class="fa-solid fa-list"></i>
+                Índice del Informe
+            </h2>
+
+            <div class="command-list">
+
+                <span>I. INTRODUCCIÓN</span>
+
+                <span>II. CARACTERIZACIÓN Y NOMENCLATURA MINERALÓGICA</span>
+
+                <span>III. MARCO METODOLÓGICO Y CRITERIOS DE CLASIFICACIÓN</span>
+
+                <span>IV. ESTUDIO PETROGRÁFICO</span>
+
+                <span>Clasificación de la Roca</span>
+
+                <span>Descripción Macroscópica</span>
+
+                <span>Descripción Microscópica</span>
+
+                <span>Síntesis Petrográfica</span>
+
+                <span>Distribución y Estilo de Mineralización</span>
+
+                <span>Caracterización de la Alteración</span>
+
+                <span>Secuencia Paragenética</span>
+
+                <span>Microfotografías</span>
+
+            </div>
+        </section>
+
+        <section class="card comandos">
+          <h2><i class="fa-solid fa-terminal"></i> Comandos de voz</h2>
+
+          <div class="command-list">
+            <span><i class="fa-solid fa-play"></i> nueva historia clínica</span>
+            <span><i class="fa-solid fa-bolt"></i> llenar todo</span>
+            <span><i class="fa-solid fa-pen"></i> corregir DNI</span>
+            <span><i class="fa-solid fa-trash"></i> borrar observaciones</span>
+            <span><i class="fa-solid fa-stop"></i> fin del mensaje</span>
+          </div>
+        </section>
+      </div>
+
+      <div class="right-column">
+
+        <section class="card microfotografias">
+
+            <h2>
+                <i class="fa-solid fa-images"></i>
+                Panel de Microfotografías
+            </h2>
+
+            <div class="encabezado-informe">
+
+                <h3>INFORME DE LABORATORIO</h3>
+
+                <h3>
+                    ESTUDIOS PETROGRÁFICOS Y MINERAGRÁFICOS
+                </h3>
+
+                <h3>MUESTRAS DE ROCA</h3>
+
+            </div>
+
+            <div class="panel-micro">
+
+                <div class="micro-cuadro">
+
+                    <img id="img1">
+
+                    <button
+                        class="btn-cargar superior-izquierda"
+                        onclick="seleccionarImagen(1)">
+                        +
+                    </button>
+
+                    <input
+                        type="file"
+                        id="file1"
+                        accept="image/*"
+                        hidden>
+
+                </div>
+
+                <div class="micro-cuadro">
+
+                    <img id="img2">
+
+                    <button
+                        class="btn-cargar superior-derecha"
+                        onclick="seleccionarImagen(2)">
+                        +
+                    </button>
+
+                    <input
+                        type="file"
+                        id="file2"
+                        accept="image/*"
+                        hidden>
+
+                </div>
+
+                <div class="micro-cuadro">
+
+                    <img id="img3">
+
+                    <button
+                        class="btn-cargar inferior-izquierda"
+                        onclick="seleccionarImagen(3)">
+                        +
+                    </button>
+
+                    <input
+                        type="file"
+                        id="file3"
+                        accept="image/*"
+                        hidden>
+
+                </div>
+
+                <div class="micro-cuadro">
+
+                    <img id="img4">
+
+                    <button
+                        class="btn-cargar inferior-derecha"
+                        onclick="seleccionarImagen(4)">
+                        +
+                    </button>
+
+                    <input
+                        type="file"
+                        id="file4"
+                        accept="image/*"
+                        hidden>
+
+                </div>
+
+            </div>
+
+        </section>
+      </div>
+
+      <section class="card estado">
+        <h2><i class="fa-solid fa-robot"></i> Estado de la IA</h2>
+
+        <div class="ia-box">
+          <div class="pulse"></div>
+          <p id="estadoIA">Esperando dictado...</p>
+        </div>
+
+        <h3><i class="fa-solid fa-microphone-lines"></i> Último dictado</h3>
+        <div id="ultimoDictado">---</div>
+      </section>
+
+    </main>
+
+    <div class="acciones">
+        <button id="btnGuardar">
+            Guardar Informe
+        </button>
+    </div>
+
+    <footer>
+      <p><i class="fa-solid fa-tooth"></i> Clínica IA Dental | Sistema de Historia Clínica Odontológica</p>
+      <span>Desarrollado para registro clínico asistido por voz</span>
+    </footer>
+
+  </div>
+
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span>Datos registrados correctamente</span>
+</div>
+</body>
+</html>

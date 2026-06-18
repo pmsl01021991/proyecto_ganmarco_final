@@ -1,0 +1,23 @@
+.indice .command-list{
+    max-height:600px;
+    overflow-y:auto;
+}
+
+.command-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.command-list span{
+  background:#c5e1f1;
+  color:#090f64;
+  padding:12px;
+  border-radius:14px;
+  font-weight:600;
+  font-size:14px;
+}
+
+.command-list i{
+  margin-right:8px;
+}

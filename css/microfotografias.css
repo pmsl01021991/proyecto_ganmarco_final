@@ -1,0 +1,67 @@
+.microfotografias{
+    text-align:center;
+}
+
+.encabezado-informe{
+    margin-bottom:20px;
+}
+
+.encabezado-informe h3{
+    color:#2c3e50;
+    font-size:15px;
+    margin-bottom:5px;
+}
+
+.panel-micro{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:1fr 1fr;
+    border:2px dashed #4c6fff;
+    min-height:450px;
+}
+
+.micro-cuadro{
+    position:relative;
+    border:1px dashed #4c6fff;
+    overflow:hidden;
+}
+
+.micro-cuadro img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.btn-cargar{
+    position:absolute;
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    background:#4c6fff;
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+    z-index:10;
+}
+
+.superior-izquierda{
+    top:10px;
+    left:10px;
+}
+
+.superior-derecha{
+    top:10px;
+    right:10px;
+}
+
+.inferior-izquierda{
+    bottom:10px;
+    left:10px;
+}
+
+.inferior-derecha{
+    bottom:10px;
+    right:10px;
+}

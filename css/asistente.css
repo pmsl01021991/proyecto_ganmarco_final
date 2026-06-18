@@ -1,0 +1,48 @@
+.estado{
+  grid-column:1 / -1;
+  border-left:8px solid #14b8a6;
+}
+
+.ia-box{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:#f0fdfa;
+  padding:15px;
+  border-radius:16px;
+  margin-bottom:18px;
+}
+
+.pulse{
+  width:14px;
+  height:14px;
+  background:#14b8a6;
+  border-radius:50%;
+  box-shadow:0 0 0 rgba(20,184,166,.7);
+  animation:pulse 1.5s infinite;
+}
+
+#estadoIA{
+  font-weight:700;
+  color:#0f766e;
+}
+
+.estado h3{
+  font-size:17px;
+  margin-bottom:10px;
+}
+
+#ultimoDictado{
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  padding:18px;
+  border-radius:16px;
+  min-height:90px;
+  color:#334155;
+}
+
+.campo-actualizado{
+  background:#ccfbf1 !important;
+  border:2px solid #14b8a6 !important;
+  animation:brillo .8s;
+}

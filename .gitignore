@@ -1,0 +1,8 @@
+vosk-model-es-0.42/
+piper_windows_amd64/
+
+*.mp4
+
+dist/
+build/
+__pycache__/

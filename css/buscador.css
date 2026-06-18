@@ -1,0 +1,27 @@
+.buscador{
+  margin-bottom:25px;
+}
+
+.busqueda-box{
+  display:flex;
+  gap:12px;
+}
+
+.busqueda-box input{
+  flex:1;
+}
+
+#btnBuscar{
+  background:#0f1563;
+  color:white;
+  border:none;
+  padding:12px 22px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:600;
+  transition:.2s;
+}
+
+#btnBuscar:hover{
+  background:#4315e9;
+}
