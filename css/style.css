@@ -6,7 +6,16 @@
 
 body{
   font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#dbeafe,#f8fafc,#ccfbf1);
+
+  background:
+  linear-gradient(
+    90deg,
+    #051729 0%,
+    #152435 45%,
+    #24384b 75%,
+    #4b89b9 100%
+  );
+
   min-height:100vh;
   color:#1e293b;
 }

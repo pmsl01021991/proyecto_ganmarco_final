@@ -36,6 +36,7 @@
 }
 
 .hero{
+    position:relative;
     padding:0;
     overflow:hidden;
     border-radius:28px;
@@ -48,4 +49,39 @@
     height:260px;
     display:block;
     object-fit:cover;
+}
+
+.hero-overlay{
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:92%;
+
+    background:rgba(9,25,70,.75);
+
+    padding:12px 20px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    backdrop-filter:blur(5px);
+}
+
+.hero-overlay h1{
+    color:white;
+    font-size:46px;
+    font-weight:700;
+    margin:0;
+    text-transform:uppercase;
+}
+
+.hero-overlay p{
+    color:white;
+    font-size:32px;
+    margin-top:4px;
 }
