@@ -3,5 +3,6 @@ piper_windows_amd64/
 *.mp4
 dist/
 build/
+
 __pycache__/
 .firebase/
