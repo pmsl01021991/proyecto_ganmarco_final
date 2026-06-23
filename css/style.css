@@ -145,6 +145,17 @@ textarea:focus{
   content:"💾 ";
 }
 
+.introduccion input{
+    margin-bottom:10px;
+}
+
+.introduccion-texto textarea{
+    min-height:280px;
+    resize:vertical;
+    line-height:1.8;
+    font-size:15px;
+}
+
 
 
 

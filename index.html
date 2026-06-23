@@ -34,7 +34,7 @@
         <img src="WhatsApp Image 2026-06-15 at 7.24.25 PM.jpeg"
             alt="Microscopía petrográfica"
             class="hero-image">
-            
+
         <div class="hero-overlay">
             <h1>ASISTENTE DE ESTUDIOS PETROGRÁFICO</h1>
             <p>A nivel macroscópico y microscópico</p>
@@ -125,16 +125,37 @@
             </div>
         </section>
 
-        <section class="card comandos">
-          <h2><i class="fa-solid fa-terminal"></i> Comandos de voz</h2>
+        <section class="card introduccion">
 
-          <div class="command-list">
-            <span><i class="fa-solid fa-play"></i> nueva historia clínica</span>
-            <span><i class="fa-solid fa-bolt"></i> llenar todo</span>
-            <span><i class="fa-solid fa-pen"></i> corregir DNI</span>
-            <span><i class="fa-solid fa-trash"></i> borrar observaciones</span>
-            <span><i class="fa-solid fa-stop"></i> fin del mensaje</span>
-          </div>
+            <h2>
+                <i class="fa-solid fa-file-lines"></i>
+                I. INTRODUCCIÓN
+            </h2>
+
+            <label>A requerimiento del</label>
+            <input
+                type="text"
+                id="requerimiento"
+                placeholder="Nombre del solicitante">
+
+            <label>Empresa</label>
+            <input
+                type="text"
+                id="empresa"
+                placeholder="Nombre de la empresa">
+
+            <label>Estudios</label>
+            <input
+                type="text"
+                id="tipoEstudio"
+                placeholder="Tipo de estudio">
+
+            <label>Muestra</label>
+            <input
+                type="text"
+                id="muestra"
+                placeholder="Código o nombre de muestra">
+
         </section>
       </div>
 
@@ -236,6 +257,20 @@
             </div>
 
         </section>
+
+        <section class="card introduccion-texto">
+
+          <h2>
+              <i class="fa-solid fa-robot"></i>
+              Texto de Introducción Generado
+          </h2>
+
+          <textarea
+              id="textoIntroduccion"
+              placeholder="La IA completará automáticamente esta sección mediante comandos de voz..."
+          ></textarea>
+
+      </section>
       </div>
 
       <section class="card estado">
