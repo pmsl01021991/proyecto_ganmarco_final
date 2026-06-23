@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "**/piper_windows_amd64/**",
+      "**/*.exe",
+      "**/*.dll",
+      "**/*.bat",
+      "**/*.cmd"
+    ]
+  }
+}

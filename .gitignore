@@ -6,3 +6,4 @@ piper_windows_amd64/
 dist/
 build/
 __pycache__/
+.firebase/
