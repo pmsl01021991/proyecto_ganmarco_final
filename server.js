@@ -23,6 +23,49 @@ const campos = [
     "muestra"
 ];
 
+let modoHistoriaCompleta = false;
+
+function textoANumeros(texto){
+
+    const mapa = {
+        cero:"0",
+        uno:"1",
+        una:"1",
+        dos:"2",
+        tres:"3",
+        cuatro:"4",
+        cinco:"5",
+        seis:"6",
+        siete:"7",
+        ocho:"8",
+        nueve:"9",
+        diez:"10"
+    };
+
+    texto = texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"");
+
+    const palabras = texto.split(/\s+/);
+
+    let resultado = "";
+
+    for(const palabra of palabras){
+
+        if(mapa[palabra]){
+            resultado += mapa[palabra] + " ";
+        }
+        else{
+            resultado += palabra + " ";
+        }
+
+    }
+
+    return resultado.trim();
+
+}
+
 let modoConversacion = false;
 let indiceCampo = 0;
 
@@ -145,26 +188,27 @@ function siguientePregunta(){
             "Indique el nombre del solicitante.",
 
         empresa:
-            "Indique el nombre de la empresa.",
+            "Indique la empresa.",
 
         tipoEstudio:
             "Indique los estudios realizados.",
 
         muestra:
-            "muestra."
+            "Indique la muestra."
 
     };
 
-    return preguntas[campos[indiceCampo]];
+    return preguntas[
+        campos[indiceCampo]
+    ];
+
 }
 
 app.post("/procesar-voz", async (req,res)=>{
 
-    const textoOriginal =
-        req.body.texto || "";
+    const textoOriginal = req.body.texto || "";
 
-    const texto =
-        normalizarTexto(textoOriginal);
+    const texto = normalizarTexto(textoOriginal);
 
     let comando = null;
     let respuestaVoz = "";
@@ -177,14 +221,34 @@ app.post("/procesar-voz", async (req,res)=>{
     ){
 
         modoConversacion = true;
+
         indiceCampo = 0;
 
         comando = {
             accion:"abrir_formulario"
         };
 
+        respuestaVoz = siguientePregunta();
+
+    }
+
+    else if(
+
+        texto.includes("terminar introduccion") ||
+        texto.includes("finalizar introduccion")
+
+    ){
+
+        modoConversacion = false;
+
         respuestaVoz =
-            siguientePregunta();
+            "Introducción finalizada.";
+
+        comando = {
+
+            accion:"modo_finalizado"
+
+        };
 
     }
 
@@ -193,36 +257,45 @@ app.post("/procesar-voz", async (req,res)=>{
         const campoActual =
             campos[indiceCampo];
 
-        comando = {
+        let valorFinal = textoOriginal;
+
+        if(campoActual==="tipoEstudio"){
+
+            valorFinal =
+                textoANumeros(textoOriginal);
+
+        }
+
+        comando={
 
             accion:"llenar",
 
             campo:campoActual,
 
-            valor:textoOriginal
+            valor:valorFinal
 
         };
 
         indiceCampo++;
 
-        if(indiceCampo >= campos.length){
+        if(indiceCampo>=campos.length){
 
-            modoConversacion = false;
+            modoConversacion=false;
 
-            respuestaVoz =
+            respuestaVoz=
                 "Introducción completada.";
 
         }
         else{
 
-            respuestaVoz =
+            respuestaVoz=
                 siguientePregunta();
 
         }
 
     }
 
-    ultimoComando = {
+    ultimoComando={
 
         ...comando,
 
@@ -233,6 +306,8 @@ app.post("/procesar-voz", async (req,res)=>{
         fecha:Date.now()
 
     };
+
+    console.log(ultimoComando);
 
     res.json({
 
@@ -252,6 +327,66 @@ app.get("/ultimo-comando",(req,res)=>{
         ultimoComando ||
         {accion:"ninguno"}
     );
+
+});
+
+app.post("/obtener-caracteristicas", async (req, res) => {
+
+    try {
+
+        const { tipoEstudio } = req.body;
+
+        const texto = tipoEstudio.toUpperCase();
+
+        let caracteristicas = [];
+
+        if (texto.includes("PETROGRAFICOS")) {
+
+            const [rows] = await db.execute(
+                "SELECT caracteristicas FROM tipos_estudio WHERE nombre='PETROGRAFICOS'"
+            );
+
+            if (rows.length > 0)
+                caracteristicas.push(rows[0].caracteristicas);
+
+        }
+
+        if (texto.includes("MINERAGRAFICOS")) {
+
+            const [rows] = await db.execute(
+                "SELECT caracteristicas FROM tipos_estudio WHERE nombre='MINERAGRAFICOS'"
+            );
+
+            if (rows.length > 0)
+                caracteristicas.push(rows[0].caracteristicas);
+
+        }
+
+        if (texto.includes("PETROMINERAGRAFICOS")) {
+
+            const [rows] = await db.execute(
+                "SELECT caracteristicas FROM tipos_estudio WHERE nombre='PETROMINERAGRAFICOS'"
+            );
+
+            if (rows.length > 0)
+                caracteristicas.push(rows[0].caracteristicas);
+
+        }
+
+        res.json({
+            ok: true,
+            caracteristicas
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            ok: false
+        });
+
+    }
 
 });
 

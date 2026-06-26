@@ -131,7 +131,7 @@ def enviar_a_formulario(texto):
 
     except Exception as e:
         print("Error enviando al formulario:", e)
-        hablar("No pude conectarme con el sistema de la clínica.")
+        hablar("No pude conectarme con el sistema GeoPilot.")
 
 
 def ejecutar_comando(comando):
@@ -150,19 +150,32 @@ def ejecutar_comando(comando):
 
         activar_microfono()
         return
+    elif (
+        "nuevo informe" in comando
+        or
+        "nueva introduccion" in comando
+    ):
+
+        jarvis_ui.cambiar_color_texto("pensando")
+        jarvis_ui.actualizar_estado(
+            "📄 Iniciando nueva introducción..."
+        )
+
+        enviar_a_formulario(comando)
+        return
 
     elif "salir" in comando or "cerrar" in comando:
-        hablar("Hasta luego.")
-        os._exit(0)
+            hablar("Hasta luego.")
+            os._exit(0)
 
     else:
         jarvis_ui.cambiar_color_texto("pensando")
-        jarvis_ui.actualizar_estado("🧠 Procesando dictado...")
+        jarvis_ui.actualizar_estado("🧠 Procesando informacion...")
 
         enviar_a_formulario(comando)
 
         jarvis_ui.cambiar_color_texto("Esperando")
-        jarvis_ui.actualizar_estado("Esperando dictado clínico...")
+        jarvis_ui.actualizar_estado("Esperando comandos de GeoPilot...")
 
 
 def iniciar_jarvis():
@@ -222,7 +235,7 @@ def iniciar_jarvis():
             texto = texto.replace("hombre ", "nombre ")
             texto = texto.replace("cinco doce", "cincuenta y dos")
             texto = texto.replace("treintaicinco", "treinta y cinco")
-            print("Odontólogo:", texto)
+            print("GeoPilot:", texto)
 
             if not texto:
                 print("No detectó texto.")
@@ -256,12 +269,12 @@ def iniciar_jarvis():
                     texto_acumulado = ""
 
                     jarvis_ui.cambiar_color_texto("pensando")
-                    jarvis_ui.actualizar_estado("🧠 Procesando historia completa...")
+                    jarvis_ui.actualizar_estado("🧠 Procesando introducción...")
 
                     enviar_a_formulario(texto_final)
 
                     jarvis_ui.cambiar_color_texto("Esperando")
-                    jarvis_ui.actualizar_estado("Esperando dictado clínico...")
+                    jarvis_ui.actualizar_estado("Esperando nueva introducción...")
 
                 else:
                     proxima_escucha_larga = True

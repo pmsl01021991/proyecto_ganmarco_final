@@ -103,57 +103,59 @@ async function guardarIntroduccion() {
 
 }
 
-function generarIntroduccion(){
+async function generarIntroduccion(){
 
     const estudios =
-        document.getElementById("tipoEstudio")
-        .value
-        .toLowerCase();
+        document.getElementById("tipoEstudio").value;
 
-    let caracteristicas = [];
-
-    if(estudios.includes("petrograficos")){
-
-        caracteristicas.push(
-            "los minerales no metálicos, tamaño de los minerales, su abundancia porcentual, los parámetros texturales y las asociaciones mineralógicas"
-        );
-
-    }
-
-    if(estudios.includes("mineragraficos")){
-
-        caracteristicas.push(
-            "los minerales metálicos"
-        );
-
-    }
-
-    if(estudios.includes("petromineragraficos")){
-
-        caracteristicas.push(
-            "los minerales metálicos y no metálicos, tamaño de los minerales, abundancia porcentual, parámetros texturales y asociaciones mineralógicas"
-        );
-
-    }
-
-    if(caracteristicas.length === 0){
+    if(estudios.trim()===""){
 
         document.getElementById(
             "textoIntroduccion"
-        ).value = "";
+        ).value="";
 
         return;
+
     }
 
-    const texto =
+    const respuesta =
+        await fetch(
+            "/obtener-caracteristicas",
+            {
 
-`El presente análisis técnico tiene como objetivo determinar ${caracteristicas.join(", ")}, incluyendo la identificación de alteraciones y reemplazamiento.
+                method:"POST",
 
-Mediante esta evaluación, se garantiza la identificación de especies minerales para las distintas evaluaciones geológicas y posibles estudios geometalurgicos. Cabe precisar que el material analizado ha sido proporcionado íntegramente por el cliente para los fines de diagnóstico e investigación anteriormente descritos.`;
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+
+                    tipoEstudio:estudios
+
+                })
+
+            }
+        );
+
+    const datos =
+        await respuesta.json();
+
+    if(!datos.ok){
+
+        return;
+
+    }
+
+    const texto=
+
+`El presente análisis técnico tiene como objetivo determinar ${datos.caracteristicas.join(", ")}, incluyendo la identificación de alteraciones y reemplazamiento.
+
+Mediante esta evaluación, se garantiza la identificación de especies minerales para las distintas evaluaciones geológicas y posibles estudios geometalúrgicos. Cabe precisar que el material analizado ha sido proporcionado íntegramente por el cliente para los fines de diagnóstico e investigación anteriormente descritos.`;
 
     document.getElementById(
         "textoIntroduccion"
-    ).value = texto;
+    ).value=texto;
 
 }
 
@@ -172,6 +174,27 @@ const camposValidos = [
 
 ];
 
+function limpiarFormulario(){
+
+    camposValidos.forEach(campo=>{
+
+        const elemento =
+        document.getElementById(campo);
+
+        if(elemento){
+
+            elemento.value="";
+
+        }
+
+    });
+
+    document.getElementById(
+        "textoIntroduccion"
+    ).value="";
+
+}
+
 function llenarCampo(campo,valor){
 
     const elemento =
@@ -179,9 +202,21 @@ function llenarCampo(campo,valor){
 
     if(!elemento) return;
 
-    elemento.value = valor;
+    elemento.value=valor;
 
-    if(campo === "tipoEstudio"){
+    elemento.classList.add(
+        "campo-actualizado"
+    );
+
+    setTimeout(()=>{
+
+        elemento.classList.remove(
+            "campo-actualizado"
+        );
+
+    },800);
+
+    if(campo==="tipoEstudio"){
 
         generarIntroduccion();
 
@@ -193,33 +228,64 @@ async function revisarComando(){
 
     try{
 
-        const res =
-            await fetch("/ultimo-comando");
+        const res=
+        await fetch("/ultimo-comando");
 
-        const comando =
-            await res.json();
+        const comando=
+        await res.json();
 
         if(!comando) return;
 
-        if(comando.fecha === ultimaFecha)
+        if(comando.fecha===ultimaFecha)
             return;
 
-        ultimaFecha =
-            comando.fecha;
+        ultimaFecha=
+        comando.fecha;
+
+        document.getElementById(
+            "ultimoDictado"
+        ).textContent=
+        comando.textoOriginal || "---";
+
+        document.getElementById(
+            "estadoIA"
+        ).textContent=
+        comando.respuestaVoz || "";
 
         if(
-            comando.accion ===
-            "llenar"
+
+            comando.accion==="abrir_formulario"
+
+        ){
+
+            limpiarFormulario();
+
+            document
+            .getElementById(
+                "requerimiento"
+            )
+            .focus();
+
+        }
+
+        else if(
+
+            comando.accion==="llenar"
+
         ){
 
             llenarCampo(
+
                 comando.campo,
+
                 comando.valor
+
             );
 
         }
 
     }
+
     catch(error){
 
         console.log(error);
@@ -230,5 +296,5 @@ async function revisarComando(){
 
 setInterval(
     revisarComando,
-    1000
+    500
 );
