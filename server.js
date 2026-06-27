@@ -185,16 +185,16 @@ function siguientePregunta(){
     const preguntas = {
 
         requerimiento:
-            "Indique el nombre del solicitante.",
+            "nombre",
 
         empresa:
-            "Indique la empresa.",
+            "empresa",
 
         tipoEstudio:
-            "Indique los estudios realizados.",
+            "estudios realizados.",
 
         muestra:
-            "Indique la muestra."
+            "muestra."
 
     };
 
@@ -207,11 +207,13 @@ function siguientePregunta(){
 app.post("/procesar-voz", async (req,res)=>{
 
     const textoOriginal = req.body.texto || "";
-
     const texto = normalizarTexto(textoOriginal);
 
     let comando = null;
     let respuestaVoz = "";
+
+    console.log("RECIBIDO:", textoOriginal);
+    console.log("INDICE:", indiceCampo);
 
     if(
 
@@ -308,6 +310,9 @@ app.post("/procesar-voz", async (req,res)=>{
     };
 
     console.log(ultimoComando);
+
+    console.log("COMANDO FINAL:", comando);
+    console.log("INDICE FINAL:", indiceCampo);
 
     res.json({
 

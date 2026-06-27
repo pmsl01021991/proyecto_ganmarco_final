@@ -3,7 +3,6 @@ import time
 import webbrowser
 import os
 import sys
-
 from asistente_petrografico import iniciar_asistente
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -28,8 +27,8 @@ startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
 subprocess.Popen(
     ["node", recurso("server.js")],
-    cwd=BASE_DIR,
-    stdout=None,
+   cwd=BASE_DIR,
+   stdout=None,
     stderr=None,
     startupinfo=startupinfo,
     creationflags=subprocess.CREATE_NO_WINDOW

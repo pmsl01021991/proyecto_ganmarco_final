@@ -69,7 +69,7 @@ def hablar(texto, mostrar=False):
     )
 
     winsound.PlaySound(archivo_salida, winsound.SND_FILENAME)
-
+    time.sleep(0.8)
     if os.path.exists(archivo_salida):
         os.remove(archivo_salida)
         
@@ -150,11 +150,8 @@ def ejecutar_comando(comando):
 
         activar_microfono()
         return
-    elif (
-        "nuevo informe" in comando
-        or
-        "nueva introduccion" in comando
-    ):
+    
+    elif ("nuevo informe" in comando or "nueva introduccion" in comando):   
 
         jarvis_ui.cambiar_color_texto("pensando")
         jarvis_ui.actualizar_estado(
@@ -181,7 +178,7 @@ def ejecutar_comando(comando):
 def iniciar_jarvis():
     global proxima_escucha_larga, dictado_completo_activo, texto_acumulado
     try:
-        hablar("Asistente gepilot iniciado.")
+        hablar("Asistente geopilot iniciado.")
     except Exception as e:
         print("Error con Piper:", e)
 
@@ -211,6 +208,9 @@ def iniciar_jarvis():
 
                 time.sleep(0.2)
                 continue
+            
+            # Evita perder la primera palabra del usuario
+            time.sleep(0.5)
 
             with sr.Microphone() as source:
                 print("\n🎤 Escuchando...")
