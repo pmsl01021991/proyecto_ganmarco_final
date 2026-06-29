@@ -162,6 +162,13 @@ Mediante esta evaluación, se garantiza la identificación de especies minerales
 document
 .getElementById("tipoEstudio")
 .addEventListener("input", generarIntroduccion);
+document
+.getElementById("tipoEstudio")
+.addEventListener("input", actualizarTituloEstudios);
+
+document
+.getElementById("muestra")
+.addEventListener("input", actualizarTituloMuestras);
 
 let ultimaFecha = 0;
 
@@ -193,6 +200,12 @@ function limpiarFormulario(){
         "textoIntroduccion"
     ).value="";
 
+    document.getElementById("tituloEstudios").textContent =
+        "ESTUDIOS";
+
+    document.getElementById("tituloMuestras").textContent =
+        "MUESTRAS";
+
 }
 
 function llenarCampo(campo,valor){
@@ -203,6 +216,17 @@ function llenarCampo(campo,valor){
     if(!elemento) return;
 
     elemento.value=valor;
+    if(campo==="tipoEstudio"){
+
+        actualizarTituloEstudios();
+
+    }
+
+    if(campo==="muestra"){
+
+        actualizarTituloMuestras();
+
+    }
 
     elemento.classList.add(
         "campo-actualizado"
@@ -224,6 +248,30 @@ function llenarCampo(campo,valor){
 
 }
 
+function actualizarTituloEstudios(){
+
+    const valor =
+        document.getElementById("tipoEstudio").value;
+
+    document.getElementById("tituloEstudios").textContent =
+        valor.trim() === ""
+            ? "ESTUDIOS"
+            : "ESTUDIOS " + valor.toUpperCase();
+
+}
+
+function actualizarTituloMuestras(){
+
+    const valor =
+        document.getElementById("muestra").value;
+
+    document.getElementById("tituloMuestras").textContent =
+        valor.trim() === ""
+            ? "MUESTRAS"
+            : "MUESTRAS " + valor.toUpperCase();
+
+}
+
 async function revisarComando(){
 
     try{
@@ -236,11 +284,12 @@ async function revisarComando(){
 
         if(!comando) return;
 
-        if(comando.fecha===ultimaFecha)
+        if(comando.fecha===ultimaFecha){
             return;
 
-        ultimaFecha=
-        comando.fecha;
+        }
+
+        ultimaFecha = comando.fecha;
 
         document.getElementById(
             "ultimoDictado"

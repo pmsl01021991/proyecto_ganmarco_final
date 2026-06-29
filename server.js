@@ -318,11 +318,6 @@ app.post("/procesar-voz", async (req,res)=>{
 
     };
 
-    console.log(ultimoComando);
-
-    console.log("COMANDO FINAL:", comando);
-    console.log("INDICE FINAL:", indiceCampo);
-
     res.json({
 
         ok:true,
@@ -341,6 +336,8 @@ app.get("/ultimo-comando",(req,res)=>{
         ultimoComando ||
         {accion:"ninguno"}
     );
+
+    ultimoComando = null;
 
 });
 

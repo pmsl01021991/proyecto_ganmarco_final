@@ -15,8 +15,8 @@ def recurso(ruta):
     return os.path.join(base, ruta)
 
 subprocess.run(
-    ["taskkill", "/F", "/IM", "node.exe"],
-    stdout=subprocess.DEVNULL,
+   ["taskkill", "/F", "/IM", "node.exe"],
+   stdout=subprocess.DEVNULL,
     stderr=subprocess.DEVNULL
 )
 
@@ -27,8 +27,8 @@ startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
 subprocess.Popen(
     ["node", recurso("server.js")],
-   cwd=BASE_DIR,
-   stdout=None,
+    cwd=BASE_DIR,
+    stdout=None,
     stderr=None,
     startupinfo=startupinfo,
     creationflags=subprocess.CREATE_NO_WINDOW
