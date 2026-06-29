@@ -21,3 +21,35 @@
 .command-list i{
   margin-right:8px;
 }
+
+.btnIndice{
+
+    width:100%;
+
+    border:none;
+
+    background:#141a73;
+
+    color:white;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    text-align:left;
+
+    font-family:'Poppins',sans-serif;
+
+    font-size:13px;
+
+    margin-bottom:8px;
+
+}
+
+.btnIndice:hover{
+
+    background:#1d4ed8;
+
+}

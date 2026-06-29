@@ -343,6 +343,34 @@ async function revisarComando(){
 
 }
 
+function mostrarVista(vista){
+
+    document.getElementById(
+        "vistaIntroduccion"
+    ).style.display="none";
+
+    document.getElementById(
+        "vistaCaracterizacion"
+    ).style.display="none";
+
+    if(vista==="introduccion"){
+
+        document.getElementById(
+            "vistaIntroduccion"
+        ).style.display="block";
+
+    }
+
+    if(vista==="caracterizacion"){
+
+        document.getElementById(
+            "vistaCaracterizacion"
+        ).style.display="block";
+
+    }
+
+}
+
 setInterval(
     revisarComando,
     500
