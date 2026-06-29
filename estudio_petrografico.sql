@@ -53,3 +53,6 @@ VALUES
 'PETROMINERAGRAFICOS',
 'minerales metálicos y no metálicos, tamaño de los minerales, abundancia porcentual, parámetros texturales y asociaciones mineralógicas'
 );
+
+
+

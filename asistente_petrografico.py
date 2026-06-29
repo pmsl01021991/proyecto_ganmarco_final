@@ -69,7 +69,6 @@ def hablar(texto, mostrar=False):
     )
 
     winsound.PlaySound(archivo_salida, winsound.SND_FILENAME)
-    time.sleep(0.8)
     if os.path.exists(archivo_salida):
         os.remove(archivo_salida)
         
@@ -166,13 +165,7 @@ def ejecutar_comando(comando):
             os._exit(0)
 
     else:
-        jarvis_ui.cambiar_color_texto("pensando")
-        jarvis_ui.actualizar_estado("🧠 Procesando informacion...")
-
         enviar_a_formulario(comando)
-
-        jarvis_ui.cambiar_color_texto("Esperando")
-        jarvis_ui.actualizar_estado("Esperando comandos de GeoPilot...")
 
 
 def iniciar_jarvis():
@@ -208,14 +201,9 @@ def iniciar_jarvis():
 
                 time.sleep(0.2)
                 continue
-            
-            # Evita perder la primera palabra del usuario
-            time.sleep(0.5)
 
             with sr.Microphone() as source:
                 print("\n🎤 Escuchando...")
-                jarvis_ui.cambiar_color_texto("escuchando")
-                jarvis_ui.actualizar_estado("🎤 Escuchando informe petrografico...")
 
                 limite_escucha = 65 if proxima_escucha_larga else 10
                 recognizer.pause_threshold = 5.5 if proxima_escucha_larga else 2.2
@@ -231,6 +219,14 @@ def iniciar_jarvis():
 
             texto = reconocer_con_vosk(audio)
             texto = texto.lower()
+            texto = texto.replace("petro gráficos", "petrograficos")
+            texto = texto.replace("petro gráfico", "petrografico")
+
+            texto = texto.replace("minera gráficos", "mineragraficos")
+            texto = texto.replace("minera gráfico", "mineragrafico")
+
+            texto = texto.replace("petro minera gráficos", "petromineragraficos")
+            texto = texto.replace("petro minera gráfico", "petromineragrafico")
 
             texto = texto.replace("hombre ", "nombre ")
             texto = texto.replace("cinco doce", "cincuenta y dos")
@@ -268,9 +264,6 @@ def iniciar_jarvis():
                     dictado_completo_activo = False
                     texto_acumulado = ""
 
-                    jarvis_ui.cambiar_color_texto("pensando")
-                    jarvis_ui.actualizar_estado("🧠 Procesando introducción...")
-
                     enviar_a_formulario(texto_final)
 
                     jarvis_ui.cambiar_color_texto("Esperando")
@@ -287,7 +280,6 @@ def iniciar_jarvis():
 
         except sr.WaitTimeoutError:
             print("No escuché nada.")
-            jarvis_ui.actualizar_estado("Esperando informe petrografico...")
 
         except Exception as e:
             print("Error:", e)

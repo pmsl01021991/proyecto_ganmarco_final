@@ -207,7 +207,14 @@ function siguientePregunta(){
 app.post("/procesar-voz", async (req,res)=>{
 
     const textoOriginal = req.body.texto || "";
-    const texto = normalizarTexto(textoOriginal);
+    let texto = normalizarTexto(textoOriginal);
+    texto = texto
+        .replace(/petro graficos/g, "petrograficos")
+        .replace(/petro grafico/g, "petrografico")
+        .replace(/minera graficos/g, "mineragraficos")
+        .replace(/minera grafico/g, "mineragrafico")
+        .replace(/petro minera graficos/g, "petromineragraficos")
+        .replace(/petro minera grafico/g, "petromineragrafico");
 
     let comando = null;
     let respuestaVoz = "";
@@ -216,7 +223,9 @@ app.post("/procesar-voz", async (req,res)=>{
     console.log("INDICE:", indiceCampo);
 
     if(
-
+        texto.includes("informe") ||
+        texto.includes("nuevo informe") ||
+        texto.includes("nuevo in forme") ||
         texto.includes("nueva introduccion") ||
         texto.includes("iniciar introduccion")
 
@@ -339,9 +348,42 @@ app.post("/obtener-caracteristicas", async (req, res) => {
 
     try {
 
-        const { tipoEstudio } = req.body;
+        let { tipoEstudio } = req.body;
 
-        const texto = tipoEstudio.toUpperCase();
+        let texto = tipoEstudio
+            .toUpperCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[.,]/g, "");
+            texto = texto
+            .replace(/[¡!¿?:;]/g, "")
+            .replace(/\s+/g, " ")
+            .trim();
+
+        texto = texto
+            .replace(/PETRO GRAFICO/g, "PETROGRAFICOS")
+            .replace(/PEDRO GRAFICO/g, "PETROGRAFICOS")
+            .replace(/PETRO GRAFICOS/g, "PETROGRAFICOS")
+            .replace(/PETROGRAFICO/g, "PETROGRAFICOS")
+            .replace(/PETROGRAFICOS/g, "PETROGRAFICOS")
+            .replace(/PEDROGRAFICOS/g, "PETROGRAFICOS")
+            .replace(/PEDROGRAFICO/g, "PETROGRAFICOS")
+            .replace(/FOTOGRAFICOS/g, "PETROGRAFICOS")
+            .replace(/FOTOGRAFICO/g, "PETROGRAFICOS")
+            .replace(/MUERAGRAFICOS/g, "MINERAGRAFICOS")
+            .replace(/MUERAGRAFICO/g, "MINERAGRAFICOS")
+
+            .replace(/MINERA GRAFICO/g, "MINERAGRAFICOS")
+            .replace(/MINERA GRAFICOS/g, "MINERAGRAFICOS")
+            .replace(/MINERAGRAFICO/g, "MINERAGRAFICOS")
+            .replace(/MINERAGRAFICOS/g, "MINERAGRAFICOS")
+            .replace(/MINERAGRAFICOS/g, "MINERAGRAFICOS")
+            .replace(/MINERAGRAFICO/g, "MINERAGRAFICOS")
+
+            .replace(/PETRO MINERA GRAFICO/g, "PETROMINERAGRAFICOS")
+            .replace(/PETRO MINERA GRAFICOS/g, "PETROMINERAGRAFICOS")
+            .replace(/PETROMINERAGRAFICO/g, "PETROMINERAGRAFICOS")
+            .replace(/PETROMINERAGRAFICOS/g, "PETROMINERAGRAFICOS");
 
         let caracteristicas = [];
 
@@ -351,7 +393,7 @@ app.post("/obtener-caracteristicas", async (req, res) => {
                 "SELECT caracteristicas FROM tipos_estudio WHERE nombre='PETROGRAFICOS'"
             );
 
-            if (rows.length > 0)
+            if (rows.length)
                 caracteristicas.push(rows[0].caracteristicas);
 
         }
@@ -362,7 +404,7 @@ app.post("/obtener-caracteristicas", async (req, res) => {
                 "SELECT caracteristicas FROM tipos_estudio WHERE nombre='MINERAGRAFICOS'"
             );
 
-            if (rows.length > 0)
+            if (rows.length)
                 caracteristicas.push(rows[0].caracteristicas);
 
         }
@@ -373,7 +415,7 @@ app.post("/obtener-caracteristicas", async (req, res) => {
                 "SELECT caracteristicas FROM tipos_estudio WHERE nombre='PETROMINERAGRAFICOS'"
             );
 
-            if (rows.length > 0)
+            if (rows.length)
                 caracteristicas.push(rows[0].caracteristicas);
 
         }
