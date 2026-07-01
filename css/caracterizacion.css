@@ -1,0 +1,99 @@
+.caracterizacion{
+
+    padding:30px;
+
+}
+
+.caracterizacion h2{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    color:#0a175f;
+
+    font-size:24px;
+
+    margin-bottom:18px;
+
+}
+
+.descripcion-caracterizacion{
+
+    text-align:justify;
+
+    font-size:15px;
+
+    line-height:1.7;
+
+    color:#1e293b;
+
+    margin-bottom:22px;
+
+}
+
+.tabla-caracterizacion{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    font-size:14px;
+
+    background:white;
+
+}
+
+.tabla-caracterizacion th{
+
+    border:1px solid #000;
+
+    padding:10px;
+
+    text-align:center;
+
+    font-weight:600;
+
+    background:#eef2f7;
+
+}
+
+.tabla-caracterizacion td{
+
+    border:1px solid #000;
+
+    height:38px;
+
+    padding:6px;
+
+}
+
+.tabla-caracterizacion th:nth-child(1){
+
+    width:18%;
+
+}
+
+.tabla-caracterizacion th:nth-child(2){
+
+    width:14%;
+
+}
+
+.tabla-caracterizacion th:nth-child(3){
+
+    width:40%;
+
+}
+
+.tabla-caracterizacion th:nth-child(4){
+
+    width:14%;
+
+}
+
+.tabla-caracterizacion th:nth-child(5){
+
+    width:14%;
+
+}

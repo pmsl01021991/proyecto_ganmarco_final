@@ -345,27 +345,35 @@ async function revisarComando(){
 
 function mostrarVista(vista){
 
-    document.getElementById(
-        "vistaIntroduccion"
-    ).style.display="none";
+    const vistaIntroduccion =
+    document.getElementById("vistaIntroduccion");
 
-    document.getElementById(
-        "vistaCaracterizacion"
-    ).style.display="none";
+    const vistaCaracterizacion =
+    document.getElementById("vistaCaracterizacion");
+
+    const panelIntroduccion =
+    document.getElementById("panelIntroduccionIzquierda");
+
+    const panelCaracterizacion =
+    document.getElementById("panelCaracterizacionIzquierda");
+
+    vistaIntroduccion.style.display="none";
+    vistaCaracterizacion.style.display="none";
+
+    panelIntroduccion.style.display="none";
+    panelCaracterizacion.style.display="none";
 
     if(vista==="introduccion"){
 
-        document.getElementById(
-            "vistaIntroduccion"
-        ).style.display="block";
+        vistaIntroduccion.style.display="block";
+        panelIntroduccion.style.display="block";
 
     }
 
     if(vista==="caracterizacion"){
 
-        document.getElementById(
-            "vistaCaracterizacion"
-        ).style.display="block";
+        vistaCaracterizacion.style.display="block";
+        panelCaracterizacion.style.display="block";
 
     }
 

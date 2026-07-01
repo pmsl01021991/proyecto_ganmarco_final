@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/toast.css">
   <link rel="stylesheet" href="css/asistente.css">
   <link rel="stylesheet" href="css/microfotografias.css">
+  <link rel="stylesheet" href="css/caracterizacion.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="js/app.js" defer></script>
@@ -50,7 +51,7 @@
         </div>
       </div>
 
-      <a href="data_informe.html" class="stat-link">
+      <a href="/data_informe.html" target="_blank" class="stat-link">
 
             <div class="stat-card">
 
@@ -108,44 +109,58 @@
 
             <div class="command-list">
 
-                <button
-                class="btnIndice"
-                onclick="mostrarVista('introduccion')">
+                <button class="btnIndice" onclick="mostrarVista('introduccion')">
+            I. INTRODUCCIÓN
+            </button>
 
-                I. INTRODUCCIÓN
+            <button class="btnIndice" onclick="mostrarVista('caracterizacion')">
+            II. CARACTERIZACIÓN Y NOMENCLATURA MINERALÓGICA
+            </button>
 
-                </button>
+            <button class="btnIndice" onclick="mostrarVista('marco')">
+            III. MARCO METODOLÓGICO Y CRITERIOS DE CLASIFICACIÓN
+            </button>
 
-                <button
-                class="btnIndice"
-                onclick="mostrarVista('caracterizacion')">
+            <button class="btnIndice" onclick="mostrarVista('estudio')">
+            IV. ESTUDIO PETROGRÁFICO
+            </button>
 
-                II. CARACTERIZACIÓN Y NOMENCLATURA MINERALÓGICA
+            <button class="btnIndice" onclick="mostrarVista('clasificacion')">
+            Clasificación de la Roca
+            </button>
 
-                </button>
+            <button class="btnIndice" onclick="mostrarVista('macroscopica')">
+            Descripción Macroscópica
+            </button>
 
-                <span>III. MARCO METODOLÓGICO Y CRITERIOS DE CLASIFICACIÓN</span>
+            <button class="btnIndice" onclick="mostrarVista('microscopica')">
+            Descripción Microscópica
+            </button>
 
-                <span>IV. ESTUDIO PETROGRÁFICO</span>
+            <button class="btnIndice" onclick="mostrarVista('sintesis')">
+            Síntesis Petrográfica
+            </button>
 
-                <span>Clasificación de la Roca</span>
+            <button class="btnIndice" onclick="mostrarVista('mineralizacion')">
+            Distribución y Estilo de Mineralización
+            </button>
 
-                <span>Descripción Macroscópica</span>
+            <button class="btnIndice" onclick="mostrarVista('alteracion')">
+            Caracterización de la Alteración
+            </button>
 
-                <span>Descripción Microscópica</span>
+            <button class="btnIndice" onclick="mostrarVista('paragenetica')">
+            Secuencia Paragenética
+            </button>
 
-                <span>Síntesis Petrográfica</span>
-
-                <span>Distribución y Estilo de Mineralización</span>
-
-                <span>Caracterización de la Alteración</span>
-
-                <span>Secuencia Paragenética</span>
-
-                <span>Microfotografías</span>
+            <button class="btnIndice" onclick="mostrarVista('microfotografias')">
+            Microfotografías
+            </button>
 
             </div>
         </section>
+
+        <div id="panelIntroduccionIzquierda">
 
         <section class="card introduccion">
 
@@ -179,6 +194,7 @@
                 placeholder="Código o nombre de muestra">
 
         </section>
+
         <section class="card comandos">
 
             <h2>
@@ -211,6 +227,38 @@
             </div>
 
         </section>
+
+        </div>
+
+        <div id="panelCaracterizacionIzquierda" style="display:none;">
+
+    <section class="card">
+
+        <h2>
+            <i class="fa-solid fa-table"></i>
+            II. CARACTERIZACIÓN
+        </h2>
+
+        <p>
+
+            Cargue automáticamente la información registrada en
+            <strong>Data del Informe</strong>.
+
+        </p>
+
+        <button id="btnCargarCaracterizacion">
+
+            <i class="fa-solid fa-download"></i>
+
+            Cargar desde Data del Informe
+
+        </button>
+
+    </section>
+
+
+        
+        </div>
       </div>
 
       <div class="right-column">
@@ -329,28 +377,70 @@
           ></textarea>
 
       </section>
+
+      </div>
       <div id="vistaCaracterizacion" style="display:none;">
 
-            <section class="card">
+      <section class="card caracterizacion">
 
-                <h2>
+            <h2>
+                <i class="fa-solid fa-microscope"></i>
+                II. CARACTERIZACIÓN Y NOMENCLATURA MINERALÓGICA
+            </h2>
 
-                    <i class="fa-solid fa-microscope"></i>
+            <p class="descripcion-caracterizacion">
+                En esta sección se presenta el inventario detallado de las especies
+                minerales identificadas a lo largo del presente estudio. Para cada
+                mineral se especifica su simbología técnica, fórmula química y
+                propiedades físicas fundamentales (densidad y dureza), las cuales
+                sirven como base para las descripciones petrográficas y
+                mineragráficas detalladas en los capítulos posteriores.
+            </p>
 
-                    II. CARACTERIZACIÓN Y NOMENCLATURA MINERALÓGICA
+            <table class="tabla-caracterizacion">
 
-                </h2>
+                <thead>
 
-                <p>
+                    <tr>
 
-                    Aquí irá la tabla de caracterización mineralógica.
+                        <th>Nombre</th>
 
-                </p>
+                        <th>Símbolo</th>
 
-            </section>
+                        <th>Composición Química</th>
 
+                        <th>Densidad<br>(g/cm3)</th>
+
+                        <th>Dureza<br>(Mohs)</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td></td><td></td><td></td><td></td><td></td></tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
         </div>
-      </div>
+      
       </div>
 
       
