@@ -3,13 +3,27 @@
     "public": ".",
     "ignore": [
       "firebase.json",
+      ".firebaserc",
       "**/.*",
       "**/node_modules/**",
+      "**/.firebase/**",
+      "**/.vscode/**",
+      "**/venv/**",
+      "**/__pycache__/**",
       "**/piper_windows_amd64/**",
+      "**/vosk-model-es-0.42/**",
+      "**/vosk-model-small-es-0.42/**",
+      "**/*.py",
+      "**/*.sql",
+      "**/*.wav",
+      "**/*.mp4",
       "**/*.exe",
       "**/*.dll",
       "**/*.bat",
-      "**/*.cmd"
+      "**/*.cmd",
+      "package.json",
+      "package-lock.json",
+      "server.js"
     ]
   }
 }
