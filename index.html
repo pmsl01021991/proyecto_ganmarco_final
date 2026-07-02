@@ -15,87 +15,20 @@
   <link rel="stylesheet" href="css/caracterizacion.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="js/modulos/imagenes.js" defer></script>
+  <script src="js/modulos/introduccion.js" defer></script>
+  <script src="js/modulos/ia.js" defer></script>
+  <script src="js/modulos/vistas.js" defer></script>
   <script src="js/app.js" defer></script>
 </head>
 <body>
   <div class="app">
 
-    <nav class="topbar">
-      <div class="brand">
-          <img src="Logo_Proyect.png" alt="MicrosGeop">
-      </div>
+    <div id="headerContainer"></div>
 
-      <div class="status-pill">
-        <i class="fa-solid fa-circle"></i>
-        Sistema activo
-      </div>
-    </nav>
+    <div id="heroContainer"></div>
 
-    <header class="hero">
-        <img src="WhatsApp Image 2026-06-15 at 7.24.25 PM.jpeg"
-            alt="Microscopía petrográfica"
-            class="hero-image">
-
-        <div class="hero-overlay">
-            <h1>ASISTENTE DE ESTUDIOS PETROGRÁFICO</h1>
-            <p>A nivel macroscópico y microscópico</p>
-        </div>
-    </header>
-
-    <section class="stats">
-      <div class="stat-card">
-        <i class="fa-solid fa-user-check"></i>
-        <div>
-          <h3>Informe</h3>
-          <p>Detalles y Parametros del Informe</p>
-        </div>
-      </div>
-
-      <a href="/data_informe.html" target="_blank" class="stat-link">
-
-            <div class="stat-card">
-
-                <i class="fa-solid fa-notes-medical"></i>
-
-                <div>
-
-                    <h3>Data del Informe</h3>
-
-                    <p>Data de Muestras y Metadatos</p>
-
-                </div>
-
-            </div>
-
-        </a>
-
-      <div class="stat-card">
-        <i class="fa-solid fa-robot"></i>
-        <div>
-          <h3>IA</h3>
-          <p>Dictado y Análisis inteligente con GeoPilot IA</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="card buscador">
-        <h2>
-            <i class="fa-solid fa-magnifying-glass"></i>
-            Buscar Informe
-        </h2>
-
-        <div class="busqueda-box">
-            <input
-                type="text"
-                id="dniBusqueda"
-                placeholder="Ingrese el nombre del informe"
-            >
-
-            <button id="btnBuscar">
-                Buscar
-            </button>
-        </div>
-    </div>
+    <div id="panelBusqueda"></div>
 
     <main id="formularioGeoPilot" class="layout">
 
@@ -255,9 +188,7 @@
         </button>
 
     </section>
-
-
-        
+       
         </div>
       </div>
 
@@ -452,24 +383,6 @@
       
       </div>
 
-        
-
-      
-
-      <section class="card estado">
-        <h2><i class="fa-solid fa-robot"></i> Estado de la IA</h2>
-
-        <div class="ia-box">
-          <div class="pulse"></div>
-          <p id="estadoIA">Esperando comando de voz...</p>
-        </div>
-
-        <h3><i class="fa-solid fa-microphone-lines"></i> Último dictado</h3>
-        <div id="ultimoDictado">
-        Aún no hay dictados.
-        </div>
-      </section>
-
     </main>
 
     <div class="acciones">
@@ -481,23 +394,8 @@
 
         </button>
     </div>
-
-    <footer>
-
-    <p>
-
-    GeoPilot IA · MicrosGeop Assistant
-
-    </p>
-
-    <span>
-
-    Sistema inteligente para generación de informes petrográficos
-
-    </span>
-
-    </footer>
-
+   
+    <div id="footerContainer"></div>
   </div>
 
   <div id="toast" class="toast">
