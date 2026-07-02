@@ -351,6 +351,11 @@ function mostrarVista(vista){
     const vistaCaracterizacion =
     document.getElementById("vistaCaracterizacion");
 
+    const vistaMicroscopica =
+    document.getElementById("vistaMicroscopica");
+
+    vistaMicroscopica.style.display="none";
+
     const panelIntroduccion =
     document.getElementById("panelIntroduccionIzquierda");
 
@@ -359,6 +364,9 @@ function mostrarVista(vista){
 
     vistaIntroduccion.style.display="none";
     vistaCaracterizacion.style.display="none";
+
+    panelIntroduccion.style.display="none";
+    panelCaracterizacion.style.display="none";
 
     panelIntroduccion.style.display="none";
     panelCaracterizacion.style.display="none";
@@ -374,6 +382,12 @@ function mostrarVista(vista){
 
         vistaCaracterizacion.style.display="block";
         panelCaracterizacion.style.display="block";
+
+    }
+
+    if(vista==="microscopica"){
+
+        vistaMicroscopica.style.display="block";
 
     }
 

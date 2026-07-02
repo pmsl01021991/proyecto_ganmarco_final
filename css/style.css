@@ -219,6 +219,20 @@ textarea:focus{
 
 }
 
+.iframeModulo{
+
+    width:100%;
+
+    height:900px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:white;
+
+}
+
 
 
 
