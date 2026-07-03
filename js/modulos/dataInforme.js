@@ -56,6 +56,14 @@ function abrirArchivo(id) {
 
 function actualizarListaArchivos() {
 
+    const panel = document.getElementById("vistaDataInforme");
+
+    if(panel){
+
+        panel.style.display = "block";
+
+    }
+
     const lista = document.getElementById("listaArchivos");
 
     if (!lista) return;

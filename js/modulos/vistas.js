@@ -1,15 +1,30 @@
 function mostrarVista(vista){
 
+    //==========================
+    // VISTAS
+    //==========================
+
+    const vistaPresentacion =
+    document.getElementById("vistaPresentacion");
+
+    const vistaContenido =
+    document.getElementById("vistaContenido");
+
     const vistaIntroduccion =
     document.getElementById("vistaIntroduccion");
 
     const vistaCaracterizacion =
     document.getElementById("vistaCaracterizacion");
 
+    const vistaMarco =
+    document.getElementById("vistaMarco");
+
     const vistaMicroscopica =
     document.getElementById("vistaMicroscopica");
 
-    vistaMicroscopica.style.display="none";
+    //==========================
+    // PANELES IZQUIERDOS
+    //==========================
 
     const panelIntroduccion =
     document.getElementById("panelIntroduccionIzquierda");
@@ -20,52 +35,89 @@ function mostrarVista(vista){
     const panelMarco =
     document.getElementById("panelMarcoBotones");
 
-    vistaIntroduccion.style.display="none";
-    vistaCaracterizacion.style.display="none";
 
-    panelIntroduccion.style.display="none";
-    panelCaracterizacion.style.display="none";
+    //==========================
+    // OCULTAR TODAS LAS VISTAS
+    //==========================
 
-    panelIntroduccion.style.display="none";
-    panelCaracterizacion.style.display="none";
+    [
+        vistaPresentacion,
+        vistaContenido,
+        vistaIntroduccion,
+        vistaCaracterizacion,
+        vistaMarco,
+        vistaMicroscopica
+    ].forEach(vistaActual=>{
 
-    if(vistaMarco)
-        vistaMarco.style.display="none";
+        if(vistaActual)
+            vistaActual.style.display="none";
 
-    panelIntroduccion.style.display="none";
-    panelCaracterizacion.style.display="none";
+    });
+
+
+    //==========================
+    // OCULTAR PANELES
+    //==========================
+
+    if(panelIntroduccion)
+        panelIntroduccion.style.display="none";
+
+    if(panelCaracterizacion)
+        panelCaracterizacion.style.display="none";
 
     if(panelMarco)
         panelMarco.style.display="none";
 
-    if(vista==="introduccion"){
 
-        vistaIntroduccion.style.display="block";
-        panelIntroduccion.style.display="block";
+    //==========================
+    // MOSTRAR VISTA
+    //==========================
 
-    }
+    switch(vista){
 
-    if(vista==="caracterizacion"){
+        case "presentacion":
 
-        vistaCaracterizacion.style.display="block";
-        panelCaracterizacion.style.display="block";
+            vistaPresentacion.style.display="block";
 
-    }
+        break;
 
-    // MARCO METODOLÓGICO
-    if(vista==="marco"){
 
-        if(vistaMarco)
+        case "contenido":
+
+            vistaContenido.style.display="block";
+
+        break;
+
+
+        case "introduccion":
+
+            vistaIntroduccion.style.display="block";
+            panelIntroduccion.style.display="block";
+
+        break;
+
+
+        case "caracterizacion":
+
+            vistaCaracterizacion.style.display="block";
+            panelCaracterizacion.style.display="block";
+
+        break;
+
+
+        case "marco":
+
             vistaMarco.style.display="block";
-
-        if(panelMarco)
             panelMarco.style.display="block";
 
-    }
+        break;
 
-    if(vista==="microscopica"){
 
-        vistaMicroscopica.style.display="block";
+        case "microscopica":
+
+            vistaMicroscopica.style.display="block";
+
+        break;
 
     }
 

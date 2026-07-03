@@ -239,7 +239,11 @@ textarea:focus{
 
 .archivosCargados{
 
-    padding:25px;
+    flex:1;
+
+    min-height:235px;
+
+    margin-top:20px;
 
 }
 

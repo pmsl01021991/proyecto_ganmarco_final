@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="css/indice.css">
   <link rel="stylesheet" href="css/buscador.css">
   <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/vistaContenido.css">
   <link rel="stylesheet" href="css/toast.css">
   <link rel="stylesheet" href="css/marco_metodologico.css">
   <link rel="stylesheet" href="css/asistente.css">
@@ -24,6 +25,7 @@
   <script src="js/modulos/marco_metodologico.js" defer></script>
   <script src="js/modulos/vistas.js" defer></script>
   <script src="js/modulos/dataInforme.js" defer></script>
+  <script src="js/modulos/data_del_informe.js" defer></script>
   <script src="js/app.js" defer></script>
 </head>
 <body>
@@ -35,7 +37,11 @@
 
     <div id="panelBusqueda"></div>
 
+    <!-- AQUI EL MAIN -->
+
     <main id="formularioGeoPilot" class="layout">
+
+<!-- AQUI EMPIEZA LA COLUMNA IZQUIERDA -->
 
       <div class="left-column">
 
@@ -47,8 +53,16 @@
 
             <div class="command-list">
 
-                <button class="btnIndice" onclick="mostrarVista('introduccion')">
-            I. INTRODUCCIÓN
+            <button class="btnIndice" onclick="mostrarVista('presentacion')">
+                PRESENTACIÓN
+            </button>
+
+            <button class="btnIndice" onclick="mostrarVista('contenido')">
+                CONTENIDO DEL INFORME
+            </button>
+
+            <button class="btnIndice" onclick="mostrarVista('introduccion')">
+                I. INTRODUCCIÓN
             </button>
 
             <button class="btnIndice" onclick="mostrarVista('caracterizacion')">
@@ -135,38 +149,38 @@
 
         <div class="panelInferior">
 
-    <section class="card comandos">
+            <section class="card comandos">
 
-        <h2>
-            <i class="fa-solid fa-microphone"></i>
-            Comandos de Voz
-        </h2>
+                <h2>
+                    <i class="fa-solid fa-microphone"></i>
+                    Comandos de Voz
+                </h2>
 
-        <div class="command-list">
+                <div class="command-list">
 
-            <span>
-                <i class="fa-solid fa-play"></i>
-                Nueva introducción
-            </span>
+                    <span>
+                        <i class="fa-solid fa-play"></i>
+                        Nueva introducción
+                    </span>
 
-            <span>
-                <i class="fa-solid fa-file-circle-plus"></i>
-                Nuevo informe
-            </span>
+                    <span>
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                        Nuevo informe
+                    </span>
 
-            <span>
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                Llenar introducción completa
-            </span>
+                    <span>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        Llenar introducción completa
+                    </span>
 
-            <span>
-                <i class="fa-solid fa-stop"></i>
-                Finalizar introducción
-            </span>
+                    <span>
+                        <i class="fa-solid fa-stop"></i>
+                        Finalizar introducción
+                    </span>
 
-        </div>
+                </div>
 
-    </section>
+            </section>
 
 </div>
 
@@ -176,18 +190,18 @@
 
         <div id="panelCaracterizacionIzquierda" style="display:none;">
 
-    <section class="card">
+        <section class="card">
 
 
-        <button id="btnCargarCaracterizacion">
+            <button id="btnCargarCaracterizacion">
 
-            <i class="fa-solid fa-download"></i>
+                <i class="fa-solid fa-download"></i>
 
-            Cargar desde Data del Informe
+                Cargar desde Data del Informe
 
-        </button>
+            </button>
 
-    </section>
+        </section>
 
     
        
@@ -233,48 +247,50 @@
 
     <input type="file" id="wordSedimentarias" accept=".doc,.docx" hidden>
 
-</section>
-      </div>
+    </section>
+        </div> 
+<!-- AQUI TERMINA LA COLUMNA IZQUIERDA -->
+        
+<!-- AQUI EMPIEZA LA COLUMNA DERECHA -->
+        <div class="right-column">
 
-      <div class="right-column">
+            <div id="vistaMarco" style="display:none;">
 
-        <div id="vistaMarco" style="display:none;">
+        <section class="card">
 
-    <section class="card">
-
-        <h2>
-
-            <i class="fa-solid fa-file-word"></i>
-
-            III. MARCO METODOLÓGICO Y CRITERIOS DE CLASIFICACIÓN
-
-        </h2>
-
-        <div id="visorWord">
-
-            <div class="mensajeInicial">
+            <h2>
 
                 <i class="fa-solid fa-file-word"></i>
 
-                <h3>No hay documento cargado</h3>
+                III. MARCO METODOLÓGICO Y CRITERIOS DE CLASIFICACIÓN
 
-                <p>
+            </h2>
 
-                    Seleccione un documento desde el panel izquierdo.
+            <div id="visorWord">
 
-                </p>
+                <div class="mensajeInicial">
+
+                    <i class="fa-solid fa-file-word"></i>
+
+                    <h3>No hay documento cargado</h3>
+
+                    <p>
+
+                        Seleccione un documento desde el panel izquierdo.
+
+                    </p>
+
+                </div>
 
             </div>
 
-        </div>
+        </section>
 
-    </section>
-
-</div>
+    </div>
 
         
-
-        <div id="vistaIntroduccion">
+        <!-- AQUI EMPIEZA VISTA PRESENTACION -->
+        <div id="vistaPresentacion" style="display:none;">
 
         <section class="card microfotografias">
 
@@ -375,22 +391,72 @@
 
         </section>
 
-        <section class="card introduccion-texto">
+        <div id="vistaIntroduccion">
 
-          <h2>
-              <i class="fa-solid fa-robot"></i>
-              Texto de Introducción Generado
-          </h2>
+        </div>
+      </div> <!-- AQUI TERMINA VISTA PRESENTACION -->
 
-          <textarea
-          id="textoIntroduccion"
-          readonly
-          placeholder="GeoPilot IA generará automáticamente la introducción según el tipo de estudio seleccionado."
-          ></textarea>
+      <!-- AQUI EMPIEZA VISTA CONTENIDO -->
 
-      </section>
+      <div id="vistaContenido" style="display:none;">
 
-      </div>
+            <section class="card">
+
+                <h2>
+                    <i class="fa-solid fa-list"></i>
+                    CONTENIDO DEL INFORME
+                </h2>
+
+                <div class="contenidoInforme">
+
+                    <h3>I. INTRODUCCIÓN</h3>
+
+                    <h3>II. CARACTERIZACIÓN Y NOMENCLATURA MINERALÓGICA</h3>
+
+                    <h3>III. MARCO METODOLÓGICO Y CRITERIOS DE CLASIFICACIÓN</h3>
+
+                    <ul>
+
+                        <li>3.1 Clasificación Modal de Rocas Ígneas (IUGS)</li>
+
+                        <li>3.2 Caracterización de Alteraciones Hidrotermales</li>
+
+                        <li>3.3 Geocronología de Venillas y Termometría Mineral</li>
+
+                    </ul>
+
+                    <h3>IV. ESTUDIO PETROGRÁFICO</h3>
+
+                    <ul>
+
+                        <li>Muestra</li>
+
+                        <li>Clasificación de la Roca</li>
+
+                        <li>Descripción Macroscópica</li>
+
+                        <li>Descripción Microscópica de Minerales</li>
+
+                        <li>Síntesis Petrográfica Microscópica</li>
+
+                        <li>Distribución y Estilo de Mineralización</li>
+
+                        <li>Caracterización de la Alteración Hidrotermal</li>
+
+                        <li>Secuencia Paragenética</li>
+
+                        <li>Microfotografías</li>
+
+                    </ul>
+
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- AQUI TERMINA VISTA CONTENIDO -->
+
       <div id="vistaCaracterizacion" style="display:none;">
 
       <section class="card caracterizacion">
@@ -455,20 +521,24 @@
         
         </div>
 
-        <section class="card archivosCargados">
+        <div id="vistaDataInforme" style="display:none;">
 
-        <h2>
-            <i class="fa-solid fa-folder-open"></i>
-            Archivos Cargados
-        </h2>
+            <section class="card archivosCargados">
 
-        <div id="listaArchivos">
+                <h2>
+                    <i class="fa-solid fa-folder-open"></i>
+                    Archivos Cargados
+                </h2>
 
-            <p>No hay archivos cargados.</p>
+                <div id="listaArchivos">
+
+                    <p>No hay archivos cargados.</p>
+
+                </div>
+
+            </section>
 
         </div>
-
-    </section>
 
         <div id="vistaMicroscopica" style="display:none;">
 
@@ -480,6 +550,8 @@
         </div>
       
       </div>
+
+      <!-- AQUI TERMINA LA COLUMNA DERECHA -->
 
     </main>
 
