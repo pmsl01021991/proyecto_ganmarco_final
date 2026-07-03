@@ -29,3 +29,51 @@
     background:#1d4ed8;
 
 }
+
+#visorWord{
+
+    min-height:700px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    overflow-y:auto;
+
+}
+
+#visorWord img{
+
+    max-width:100%;
+
+}
+
+.mensajeInicial{
+
+    text-align:center;
+
+    color:#64748b;
+
+    margin-top:180px;
+
+}
+
+.mensajeInicial i{
+
+    font-size:80px;
+
+    color:#2452d6;
+
+    margin-bottom:20px;
+
+}
+
+.wordContenido{
+
+    line-height:1.8;
+
+    font-size:15px;
+
+}

@@ -1,29 +1,77 @@
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded",()=>{
 
-    const btnIgneas = document.getElementById("btnMarcoIgneas");
-    const btnMetamorficas = document.getElementById("btnMarcoMetamorficas");
-    const btnSedimentarias = document.getElementById("btnMarcoSedimentarias");
+    configurarWord(
+        "btnMarcoIgneas",
+        "wordIgneas"
+    );
 
-    const wordIgneas = document.getElementById("wordIgneas");
-    const wordMetamorficas = document.getElementById("wordMetamorficas");
-    const wordSedimentarias = document.getElementById("wordSedimentarias");
+    configurarWord(
+        "btnMarcoMetamorficas",
+        "wordMetamorficas"
+    );
 
-    btnIgneas?.addEventListener("click", () => {
-
-        wordIgneas.click();
-
-    });
-
-    btnMetamorficas?.addEventListener("click", () => {
-
-        wordMetamorficas.click();
-
-    });
-
-    btnSedimentarias?.addEventListener("click", () => {
-
-        wordSedimentarias.click();
-
-    });
+    configurarWord(
+        "btnMarcoSedimentarias",
+        "wordSedimentarias"
+    );
 
 });
+
+function configurarWord(idBoton,idInput){
+
+    const boton=document.getElementById(idBoton);
+
+    const input=document.getElementById(idInput);
+
+    const visor=document.getElementById("visorWord");
+
+    boton.addEventListener("click",()=>{
+
+        input.click();
+
+    });
+
+    input.addEventListener("change",async function(){
+
+        if(this.files.length===0) return;
+
+        const archivo=this.files[0];
+
+        const arrayBuffer=
+            await archivo.arrayBuffer();
+
+        const resultado = await mammoth.convertToHtml(
+            {
+                arrayBuffer
+            },
+            {
+                convertImage: mammoth.images.imgElement(function(image){
+
+                    return image.read("base64").then(function(imageBuffer){
+
+                        return {
+
+                            src: "data:" + image.contentType + ";base64," + imageBuffer
+
+                        };
+
+                    });
+
+                })
+
+            }
+        );
+
+        visor.innerHTML=`
+
+            <div class="wordContenido">
+
+                ${resultado.value}
+
+            </div>
+
+        `;
+
+    });
+
+}
