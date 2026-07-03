@@ -1,0 +1,139 @@
+/* ===========================
+   TARJETA DATA DEL INFORME
+=========================== */
+
+.dropdown-data{
+
+    position:relative;
+
+}
+
+.data-card{
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.data-card:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.data-card .fa-chevron-down,
+.data-card .fa-chevron-up{
+
+    margin-left:auto;
+
+    font-size:20px;
+
+    color:#145fb6;
+
+}
+
+
+/* ===========================
+   MENÚ DESPLEGABLE
+=========================== */
+
+.menuDataFlotante{
+
+    position:absolute;
+
+    top:105%;
+
+    left:0;
+
+    width:100%;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:15px;
+
+    display:none;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.18);
+
+    z-index:999;
+
+}
+
+.menuDataFlotante.activo{
+
+    display:flex;
+
+}
+
+
+/* ===========================
+   BOTONES
+=========================== */
+
+.btnData{
+
+    width:100%;
+
+    border:none;
+
+    background:#143cac;
+
+    color:white;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    font-family:'Poppins',sans-serif;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.btnData:hover{
+
+    background:#2452d6;
+
+}
+
+
+/* ===========================
+   ARCHIVOS CARGADOS
+=========================== */
+
+.archivo-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 0;
+
+    border-bottom:1px solid #ececec;
+
+}
+
+.archivo-item:last-child{
+
+    border-bottom:none;
+
+}
+
+.archivo-item i{
+
+    color:#16a34a;
+
+}

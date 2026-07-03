@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/toast.css">
   <link rel="stylesheet" href="css/asistente.css">
   <link rel="stylesheet" href="css/microfotografias.css">
+  <link rel="stylesheet" href="css/dataInforme.css">
   <link rel="stylesheet" href="css/caracterizacion.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -19,6 +20,7 @@
   <script src="js/modulos/introduccion.js" defer></script>
   <script src="js/modulos/ia.js" defer></script>
   <script src="js/modulos/vistas.js" defer></script>
+  <script src="js/modulos/dataInforme.js" defer></script>
   <script src="js/app.js" defer></script>
 </head>
 <body>
@@ -128,38 +130,44 @@
 
         </section>
 
-        <section class="card comandos">
+        <div class="panelInferior">
 
-            <h2>
-                <i class="fa-solid fa-microphone"></i>
-                Comandos de Voz
-            </h2>
+    <section class="card comandos">
 
-            <div class="command-list">
+        <h2>
+            <i class="fa-solid fa-microphone"></i>
+            Comandos de Voz
+        </h2>
 
-                <span>
-                    <i class="fa-solid fa-play"></i>
-                    Nueva introducción
-                </span>
+        <div class="command-list">
 
-                <span>
-                    <i class="fa-solid fa-file-circle-plus"></i>
-                    Nuevo informe
-                </span>
+            <span>
+                <i class="fa-solid fa-play"></i>
+                Nueva introducción
+            </span>
 
-                <span>
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    Llenar introducción completa
-                </span>
+            <span>
+                <i class="fa-solid fa-file-circle-plus"></i>
+                Nuevo informe
+            </span>
 
-                <span>
-                    <i class="fa-solid fa-stop"></i>
-                    Finalizar introducción
-                </span>
+            <span>
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                Llenar introducción completa
+            </span>
 
-            </div>
+            <span>
+                <i class="fa-solid fa-stop"></i>
+                Finalizar introducción
+            </span>
 
-        </section>
+        </div>
+
+    </section>
+
+</div>
+
+
 
         </div>
 
@@ -167,17 +175,6 @@
 
     <section class="card">
 
-        <h2>
-            <i class="fa-solid fa-table"></i>
-            II. CARACTERIZACIÓN
-        </h2>
-
-        <p>
-
-            Cargue automáticamente la información registrada en
-            <strong>Data del Informe</strong>.
-
-        </p>
 
         <button id="btnCargarCaracterizacion">
 
@@ -193,6 +190,9 @@
       </div>
 
       <div class="right-column">
+
+        
+
         <div id="vistaIntroduccion">
 
         <section class="card microfotografias">
@@ -372,6 +372,21 @@
         </section>
         </div>
 
+        <section class="card archivosCargados">
+
+        <h2>
+            <i class="fa-solid fa-folder-open"></i>
+            Archivos Cargados
+        </h2>
+
+        <div id="listaArchivos">
+
+            <p>No hay archivos cargados.</p>
+
+        </div>
+
+    </section>
+
         <div id="vistaMicroscopica" style="display:none;">
 
             <iframe
@@ -385,14 +400,16 @@
 
     </main>
 
-    <div class="acciones">
+    <div class="guardarContainer">
+
         <button id="btnGuardar">
 
-        <i class="fa-solid fa-floppy-disk"></i>
+            <i class="fa-solid fa-floppy-disk"></i>
 
-        Guardar Informe
+            Guardar Informe
 
         </button>
+
     </div>
    
     <div id="footerContainer"></div>

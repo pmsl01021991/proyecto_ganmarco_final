@@ -85,9 +85,9 @@ textarea:focus{
 }
 
 .layout{
-  display:grid;
-  grid-template-columns:380px 1fr;
-  gap:25px;
+    display:grid;
+    grid-template-columns:380px 1fr;
+    gap:25px;
 }
 
 .card{
@@ -232,6 +232,127 @@ textarea:focus{
     background:white;
 
 }
+
+/*====================================
+  ARCHIVOS CARGADOS
+====================================*/
+
+.archivosCargados{
+
+    padding:25px;
+
+}
+
+.archivosCargados h2{
+
+    color:#0a175f;
+
+    font-size:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:18px;
+
+}
+
+#listaArchivos{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+#listaArchivos p{
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+.archivo-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:12px;
+
+    background:#f8fafc;
+
+    border-radius:12px;
+
+    border:1px solid #dbeafe;
+
+    font-size:14px;
+
+}
+
+.archivo-item i{
+
+    color:#16a34a;
+
+    font-size:18px;
+
+}
+
+/*====================================
+  BOTÓN GUARDAR
+====================================*/
+.panelInferior{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:25px;
+
+    margin-top:20px;
+
+}
+
+.comandos{
+
+    width:230px;
+
+    flex-shrink:0;
+
+}
+
+.archivosCargados{
+
+    flex:1;
+
+    min-height:235px;
+
+}
+
+.guardarContainer{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:25px;
+
+}
+
+#btnGuardar{
+
+    width:320px;
+
+}
+
+
 
 
 

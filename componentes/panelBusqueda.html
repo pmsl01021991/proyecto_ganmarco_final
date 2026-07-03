@@ -1,51 +1,131 @@
 <section class="stats">
-      <div class="stat-card">
+
+    <!-- INFORME -->
+    <div class="stat-card">
         <i class="fa-solid fa-user-check"></i>
+
         <div>
-          <h3>Informe</h3>
-          <p>Detalles y Parametros del Informe</p>
+
+            <h3>Informe</h3>
+
+            <p>Detalles y Parámetros del Informe</p>
+
         </div>
-        
-      </div>
 
-            <div class="stat-card">
+    </div>
 
-                <i class="fa-solid fa-notes-medical"></i>
 
-                <div>
+    <!-- DATA DEL INFORME -->
+    <div class="dropdown-data">
 
-                    <h3>Data del Informe</h3>
+        <div class="stat-card data-card" onclick="toggleDataMenu()">
 
-                    <p>Data de Muestras y Metadatos</p>
+            <i class="fa-solid fa-notes-medical"></i>
 
-                </div>
+            <div class="data-texto">
+
+                <h3>Data del Informe</h3>
+
+                <p>Data de Muestras y Metadatos</p>
 
             </div>
 
-      <div class="stat-card">
-        <i class="fa-solid fa-robot"></i>
-        <div>
-          <h3>IA</h3>
-          <p>Dictado y Análisis inteligente con GeoPilot IA</p>
+            <i id="flechaData"
+               class="fa-solid fa-chevron-down">
+            </i>
+
         </div>
-      </div>
-    </section>
 
-    <div class="card buscador">
-        <h2>
-            <i class="fa-solid fa-magnifying-glass"></i>
-            Buscar Informe
-        </h2>
+        <div id="menuData" class="menuDataFlotante">
 
-        <div class="busqueda-box">
-            <input
-                type="text"
-                id="dniBusqueda"
-                placeholder="Ingrese el nombre del informe"
-            >
+            <button class="btnData"
+                onclick="abrirArchivo('minerales')">
 
-            <button id="btnBuscar">
-                Buscar
+                Data de Minerales
+
             </button>
+
+            <button class="btnData"
+                onclick="abrirArchivo('igneas')">
+
+                Data de Rocas Ígneas
+
+            </button>
+
+            <button class="btnData"
+                onclick="abrirArchivo('metamorficas')">
+
+                Data de Rocas Metamórficas
+
+            </button>
+
+            <button class="btnData"
+                onclick="abrirArchivo('sedimentarias')">
+
+                Data de Rocas Sedimentarias
+
+            </button>
+
+            <button class="btnData"
+                onclick="abrirArchivo('alteraciones')">
+
+                Data de Alteraciones
+
+            </button>
+
         </div>
+
     </div>
+
+
+    <!-- IA -->
+    <div class="stat-card">
+
+        <i class="fa-solid fa-robot"></i>
+
+        <div>
+
+            <h3>IA</h3>
+
+            <p>Dictado y Análisis inteligente con GeoPilot IA</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<input type="file" id="minerales" hidden>
+<input type="file" id="igneas" hidden>
+<input type="file" id="metamorficas" hidden>
+<input type="file" id="sedimentarias" hidden>
+<input type="file" id="alteraciones" hidden>
+
+
+<div class="card buscador">
+
+    <h2>
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        Buscar Informe
+
+    </h2>
+
+    <div class="busqueda-box">
+
+        <input
+            type="text"
+            id="dniBusqueda"
+            placeholder="Ingrese el nombre del informe">
+
+        <button id="btnBuscar">
+
+            Buscar
+
+        </button>
+
+    </div>
+
+</div>

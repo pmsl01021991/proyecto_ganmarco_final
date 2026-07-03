@@ -17,6 +17,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     await cargarComponente("footerContainer", "footer.html");
 
     await cargarComponente("panelBusqueda", "panelBusqueda.html");
+    iniciarDataInforme();
 
 });
 
