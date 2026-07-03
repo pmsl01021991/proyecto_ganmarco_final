@@ -114,38 +114,7 @@
 
         <div id="panelIntroduccionIzquierda">
 
-        <section class="card introduccion">
-
-            <h2>
-                <i class="fa-solid fa-file-lines"></i>
-                I. INTRODUCCIÓN
-            </h2>
-
-            <label>A requerimiento del</label>
-            <input
-                type="text"
-                id="requerimiento"
-                placeholder="Nombre del solicitante">
-
-            <label>Empresa</label>
-            <input
-            type="text"
-            id="empresa"
-            placeholder="Ejemplo: Gloria">
-
-            <label>Estudios</label>
-            <input
-                type="text"
-                id="tipoEstudio"
-                placeholder="Tipo de estudio">
-
-            <label>Muestras </label>
-            <input
-                type="text"
-                id="muestra"
-                placeholder="Código o nombre de muestra">
-
-        </section>
+        
 
         <div class="panelInferior">
 
@@ -391,10 +360,80 @@
 
         </section>
 
-        <div id="vistaIntroduccion">
+        
+      </div> <!-- AQUI TERMINA VISTA PRESENTACION -->
+
+      <div id="vistaIntroduccion" style="display:none;">
+
+    <section class="card">
+
+        <h2>
+
+            <i class="fa-solid fa-file-lines"></i>
+
+            I. INTRODUCCIÓN
+
+        </h2>
+
+        <div class="documentoIntroduccion">
+
+            <p>
+
+                A requerimiento del
+
+                <input
+                    type="text"
+                    id="requerimiento"
+                    class="campoDocumento"
+                    placeholder="................">
+
+                de la empresa
+
+                <input
+                    type="text"
+                    id="empresa"
+                    class="campoDocumento"
+                    placeholder="................">,
+
+                se han realizado estudios
+
+                <input
+                    type="text"
+                    id="tipoEstudio"
+                    class="campoDocumento"
+                    placeholder="................">
+
+                de la muestra
+
+                <input
+                    type="text"
+                    id="muestra"
+                    class="campoDocumento"
+                    placeholder="................">.
+
+            </p>
+
+            <br>
+
+            <p id="parrafoGenerado">
+
+                El presente análisis técnico...
+
+            </p>
+
+            <br>
+
+            <p>
+
+                Mediante esta evaluación, se garantiza la identificación de especies minerales para las distintas evaluaciones geológicas y posibles estudios geometalúrgicos. Cabe precisar que el material analizado ha sido proporcionado íntegramente por el cliente para los fines de diagnóstico e investigación anteriormente descritos.
+
+            </p>
 
         </div>
-      </div> <!-- AQUI TERMINA VISTA PRESENTACION -->
+
+    </section>
+
+</div>
 
       <!-- AQUI EMPIEZA VISTA CONTENIDO -->
 

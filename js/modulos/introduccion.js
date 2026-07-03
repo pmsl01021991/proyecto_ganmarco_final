@@ -15,12 +15,12 @@ async function guardarIntroduccion() {
             document.getElementById("muestra").value,
 
         textoIntroduccion:
-            document.getElementById("textoIntroduccion").value
+            document.getElementById("parrafoGenerado").textContent
 
     };
 
     const respuesta = await fetch(
-        "/guardar-introduccion",
+        "http://localhost:3000/guardar-introduccion",
         {
             method: "POST",
 
@@ -50,12 +50,13 @@ async function generarIntroduccion(){
 
     const estudios =
         document.getElementById("tipoEstudio").value;
+        console.log("Estudios:", estudios);
 
     if(estudios.trim()===""){
 
         document.getElementById(
-            "textoIntroduccion"
-        ).value="";
+            "parrafoGenerado"
+        ).textContent="";
 
         return;
 
@@ -63,7 +64,7 @@ async function generarIntroduccion(){
 
     const respuesta =
         await fetch(
-            "/obtener-caracteristicas",
+            "http://localhost:3000/obtener-caracteristicas",
             {
 
                 method:"POST",
@@ -81,8 +82,12 @@ async function generarIntroduccion(){
             }
         );
 
+        
+
     const datos =
         await respuesta.json();
+
+    console.log(datos);
 
     if(!datos.ok){
 
@@ -97,8 +102,8 @@ async function generarIntroduccion(){
 Mediante esta evaluación, se garantiza la identificación de especies minerales para las distintas evaluaciones geológicas y posibles estudios geometalúrgicos. Cabe precisar que el material analizado ha sido proporcionado íntegramente por el cliente para los fines de diagnóstico e investigación anteriormente descritos.`;
 
     document.getElementById(
-        "textoIntroduccion"
-    ).value=texto;
+    "parrafoGenerado"
+    ).textContent = texto;
 
 }
 
@@ -118,14 +123,19 @@ function limpiarFormulario(){
     });
 
     document.getElementById(
-        "textoIntroduccion"
-    ).value="";
+        "parrafoGenerado"
+    ).textContent="";
 
     document.getElementById("tituloEstudios").textContent =
         "ESTUDIOS";
 
     document.getElementById("tituloMuestras").textContent =
         "MUESTRAS";
+
+    document.getElementById("txtRequerimiento").textContent = "__________";
+    document.getElementById("txtEmpresa").textContent = "__________";
+    document.getElementById("txtEstudio").textContent = "__________";
+    document.getElementById("txtMuestra").textContent = "__________";
 
 }
 
@@ -137,6 +147,34 @@ function llenarCampo(campo,valor){
     if(!elemento) return;
 
     elemento.value=valor;
+
+        switch(campo){
+
+        case "requerimiento":
+
+            document.getElementById("txtRequerimiento").textContent = valor;
+
+        break;
+
+        case "empresa":
+
+            document.getElementById("txtEmpresa").textContent = valor;
+
+        break;
+
+        case "tipoEstudio":
+
+            document.getElementById("txtEstudio").textContent = valor;
+
+        break;
+
+        case "muestra":
+
+            document.getElementById("txtMuestra").textContent = valor;
+
+        break;
+
+    }
     if(campo==="tipoEstudio"){
 
         actualizarTituloEstudios();
@@ -207,3 +245,29 @@ document
 document
 .getElementById("muestra")
 .addEventListener("input", actualizarTituloMuestras);
+
+document
+.getElementById("requerimiento")
+.addEventListener("input",()=>{
+
+});
+
+document
+.getElementById("empresa")
+.addEventListener("input",()=>{
+
+});
+
+document
+.getElementById("tipoEstudio")
+.addEventListener("input",()=>{
+
+    generarIntroduccion();
+
+});
+
+document
+.getElementById("muestra")
+.addEventListener("input",()=>{
+
+});
