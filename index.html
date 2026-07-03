@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/buscador.css">
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/toast.css">
+  <link rel="stylesheet" href="css/marco_metodologico.css">
   <link rel="stylesheet" href="css/asistente.css">
   <link rel="stylesheet" href="css/microfotografias.css">
   <link rel="stylesheet" href="css/dataInforme.css">
@@ -19,6 +20,7 @@
   <script src="js/modulos/imagenes.js" defer></script>
   <script src="js/modulos/introduccion.js" defer></script>
   <script src="js/modulos/ia.js" defer></script>
+  <script src="js/modulos/marco_metodologico.js" defer></script>
   <script src="js/modulos/vistas.js" defer></script>
   <script src="js/modulos/dataInforme.js" defer></script>
   <script src="js/app.js" defer></script>
@@ -185,11 +187,77 @@
         </button>
 
     </section>
+
+    
        
         </div>
+
+        <section class="card" id="panelMarcoBotones" style="display:none;">
+
+    <h2>
+
+        <i class="fa-solid fa-book"></i>
+
+        III. MARCO METODOLÓGICO Y CRITERIOS DE CLASIFICACIÓN
+
+    </h2>
+
+    <button class="btnMarco" id="btnMarcoIgneas">
+
+        <i class="fa-solid fa-file-word"></i>
+
+        Rocas Ígneas
+
+    </button>
+
+    <button class="btnMarco" id="btnMarcoMetamorficas">
+
+        <i class="fa-solid fa-file-word"></i>
+
+        Rocas Metamórficas
+
+    </button>
+
+    <button class="btnMarco" id="btnMarcoSedimentarias">
+
+        <i class="fa-solid fa-file-word"></i>
+
+        Rocas Sedimentarias
+
+    </button>
+
+    <input type="file" id="wordIgneas" accept=".doc,.docx" hidden>
+
+    <input type="file" id="wordMetamorficas" accept=".doc,.docx" hidden>
+
+    <input type="file" id="wordSedimentarias" accept=".doc,.docx" hidden>
+
+</section>
       </div>
 
       <div class="right-column">
+
+        <div id="vistaMarco" style="display:none;">
+
+    <section class="card">
+
+        <h2>
+
+            <i class="fa-solid fa-file-word"></i>
+
+            III. MARCO METODOLÓGICO Y CRITERIOS DE CLASIFICACIÓN
+
+        </h2>
+
+        <div id="visorWord">
+
+            <p>No se ha cargado ningún documento.</p>
+
+        </div>
+
+    </section>
+
+</div>
 
         
 
@@ -370,6 +438,8 @@
             </table>
 
         </section>
+
+        
         </div>
 
         <section class="card archivosCargados">
