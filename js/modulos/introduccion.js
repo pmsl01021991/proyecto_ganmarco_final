@@ -15,7 +15,7 @@ async function guardarIntroduccion() {
             document.getElementById("muestra").value,
 
         textoIntroduccion:
-            document.getElementById("parrafoGenerado").textContent
+            document.getElementById("introduccionGenerada").textContent
 
     };
 
@@ -55,7 +55,7 @@ async function generarIntroduccion(){
     if(estudios.trim()===""){
 
         document.getElementById(
-            "parrafoGenerado"
+            "introduccionGenerada"
         ).textContent="";
 
         return;
@@ -102,10 +102,13 @@ async function generarIntroduccion(){
 Mediante esta evaluación, se garantiza la identificación de especies minerales para las distintas evaluaciones geológicas y posibles estudios geometalúrgicos. Cabe precisar que el material analizado ha sido proporcionado íntegramente por el cliente para los fines de diagnóstico e investigación anteriormente descritos.`;
 
     document.getElementById(
-    "parrafoGenerado"
-    ).textContent = texto;
+    "introduccionGenerada"
+).textContent =
 
-}
+`A requerimiento del ${document.getElementById("requerimiento").value} 
+de la empresa ${document.getElementById("empresa").value}, se han realizado estudios ${document.getElementById("tipoEstudio").value} de la muestra ${document.getElementById("muestra").value}.`;
+
+    }
 
 function limpiarFormulario(){
 
@@ -123,7 +126,7 @@ function limpiarFormulario(){
     });
 
     document.getElementById(
-        "parrafoGenerado"
+        "introduccionGenerada"
     ).textContent="";
 
     document.getElementById("tituloEstudios").textContent =
@@ -205,6 +208,19 @@ function llenarCampo(campo,valor){
 
     }
 
+    if(
+
+        document.getElementById("requerimiento").value &&
+        document.getElementById("empresa").value &&
+        document.getElementById("tipoEstudio").value &&
+        document.getElementById("muestra").value
+
+    ){
+
+        generarIntroduccion();
+
+}
+
 }
 
 function actualizarTituloEstudios(){
@@ -248,15 +264,11 @@ document
 
 document
 .getElementById("requerimiento")
-.addEventListener("input",()=>{
-
-});
+.addEventListener("input",generarIntroduccion);
 
 document
 .getElementById("empresa")
-.addEventListener("input",()=>{
-
-});
+.addEventListener("input",generarIntroduccion);
 
 document
 .getElementById("tipoEstudio")
@@ -268,6 +280,4 @@ document
 
 document
 .getElementById("muestra")
-.addEventListener("input",()=>{
-
-});
+.addEventListener("input",generarIntroduccion);

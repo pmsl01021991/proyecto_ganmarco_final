@@ -104,9 +104,22 @@ textarea:focus{
 
 }
 
+/*====================================
+ALTURA UNIFICADA DE LAS VISTAS
+====================================*/
+
 .right-column{
 
     display:flex;
+
+    flex-direction:column;
+
+}
+
+.right-column > div .card{
+
+    display:flex;
+
     flex-direction:column;
 
 }
@@ -338,25 +351,6 @@ textarea:focus{
 /*====================================
   BOTÓN GUARDAR
 ====================================*/
-.panelInferior{
-
-    display:flex;
-
-    align-items:flex-start;
-
-    gap:25px;
-
-    margin-top:20px;
-
-}
-
-.comandos{
-
-    width:230px;
-
-    flex-shrink:0;
-
-}
 
 .archivosCargados{
 
@@ -427,6 +421,62 @@ textarea:focus{
     box-shadow:none;
 
 }
+
+/*====================================
+ FORMULARIO INTRODUCCIÓN
+====================================*/
+
+.formularioIntroduccion{
+
+    margin-top:25px;
+
+}
+
+.formularioVertical{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.formularioVertical label{
+
+    font-weight:600;
+
+    color:#1f2937;
+
+}
+
+.formularioVertical input{
+
+    margin-top:0;
+
+}
+
+.left-column{
+    align-self:start;
+}
+
+.right-column{
+    align-self:start;
+}
+
+.indice{
+    height:780px;
+}
+
+#vistaPresentacion .card,
+#vistaContenido .card,
+#vistaIntroduccion .card,
+#vistaCaracterizacion .card,
+#vistaMarco .card{
+    height:780px;
+    overflow-y:auto;
+}
+
 
 
 

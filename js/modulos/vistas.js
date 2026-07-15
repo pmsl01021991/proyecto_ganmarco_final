@@ -121,25 +121,7 @@ function mostrarVista(vista){
 
     }
 
-        setTimeout(() => {
-
-        igualarAlturaIndice();
-
-    }, 0);
+       
 
 }
 
-function igualarAlturaIndice(){
-
-    const indice =
-    document.querySelector(".indice");
-
-    const vistaVisible =
-    document.querySelector(".right-column > div[style*='display: block'] .card");
-
-    if(!indice || !vistaVisible) return;
-
-    indice.style.height =
-    vistaVisible.offsetHeight + "px";
-
-}
