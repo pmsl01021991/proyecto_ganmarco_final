@@ -35,6 +35,9 @@ function mostrarVista(vista){
     const panelMarco =
     document.getElementById("panelMarcoBotones");
 
+    const formularioIntroduccion =
+    document.querySelector(".formularioIntroduccion");
+
 
     //==========================
     // OCULTAR TODAS LAS VISTAS
@@ -68,6 +71,10 @@ function mostrarVista(vista){
     if(panelMarco)
         panelMarco.style.display="none";
 
+    if(formularioIntroduccion){
+        formularioIntroduccion.style.display = "none";
+}
+
 
     //==========================
     // MOSTRAR VISTA
@@ -91,8 +98,11 @@ function mostrarVista(vista){
 
         case "introduccion":
 
-            vistaIntroduccion.style.display="block";
-            panelIntroduccion.style.display="block";
+            vistaIntroduccion.style.display = "block";
+
+            if(formularioIntroduccion){
+                formularioIntroduccion.style.display = "block";
+            }
 
         break;
 
