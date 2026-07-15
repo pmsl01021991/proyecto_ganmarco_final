@@ -15,7 +15,7 @@ async function revisarComando(){
     try{
 
         const res=
-        await fetch("/ultimo-comando");
+        await fetch("http://localhost:3000/ultimo-comando");
 
         const comando=
         await res.json();
@@ -29,15 +29,23 @@ async function revisarComando(){
 
         ultimaFecha = comando.fecha;
 
-        document.getElementById(
-            "ultimoDictado"
-        ).textContent=
-        comando.textoOriginal || "---";
+        const ultimoDictado = document.getElementById("ultimoDictado");
 
-        document.getElementById(
-            "estadoIA"
-        ).textContent=
-        comando.respuestaVoz || "";
+        if (ultimoDictado) {
+
+            ultimoDictado.textContent =
+                comando.textoOriginal || "---";
+
+        }
+
+        const estadoIA = document.getElementById("estadoIA");
+
+        if (estadoIA) {
+
+            estadoIA.textContent =
+                comando.respuestaVoz || "";
+
+        }
 
         if(
 

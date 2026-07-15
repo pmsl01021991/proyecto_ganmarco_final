@@ -1,6 +1,11 @@
 .indice .command-list{
-    max-height:600px;
+
+    flex:1;
+
     overflow-y:auto;
+
+    max-height:none;
+
 }
 
 .command-list{

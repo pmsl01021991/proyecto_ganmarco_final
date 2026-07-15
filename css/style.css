@@ -88,6 +88,33 @@ textarea:focus{
     display:grid;
     grid-template-columns:380px 1fr;
     gap:25px;
+
+    /* NUEVO */
+    align-items:stretch;
+}
+
+/* ===========================
+   NUEVO
+=========================== */
+
+.left-column{
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+.right-column{
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+.indice{
+    display:flex;
+    flex-direction:column;
+
 }
 
 .card{
@@ -111,6 +138,7 @@ textarea:focus{
   align-items:center;
   gap:10px;
 }
+
 
 .acciones{
   display:flex;
@@ -170,8 +198,6 @@ textarea:focus{
 .right-column .microfotografias{
     margin-bottom:0;
     padding-bottom:15px;
-    border-bottom-left-radius:0;
-    border-bottom-right-radius:0;
     box-shadow:none;
 }
 
