@@ -135,3 +135,9 @@ function mostrarVista(vista){
 
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    mostrarVista("presentacion");
+
+});
+
