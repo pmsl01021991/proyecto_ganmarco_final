@@ -359,63 +359,37 @@ app.post("/obtener-caracteristicas", async (req, res) => {
 
         texto = texto
             .replace(/PETRO GRAFICO/g, "PETROGRAFICOS")
-            .replace(/PEDRO GRAFICO/g, "PETROGRAFICOS")
             .replace(/PETRO GRAFICOS/g, "PETROGRAFICOS")
-            .replace(/PETROGRAFICO/g, "PETROGRAFICOS")
-            .replace(/PETROGRAFICOS/g, "PETROGRAFICOS")
-            .replace(/PEDROGRAFICOS/g, "PETROGRAFICOS")
+            .replace(/PEDRO GRAFICO/g, "PETROGRAFICOS")
             .replace(/PEDROGRAFICO/g, "PETROGRAFICOS")
-            .replace(/FOTOGRAFICOS/g, "PETROGRAFICOS")
+            .replace(/PEDROGRAFICOS/g, "PETROGRAFICOS")
             .replace(/FOTOGRAFICO/g, "PETROGRAFICOS")
-            .replace(/MUERAGRAFICOS/g, "MINERAGRAFICOS")
-            .replace(/MUERAGRAFICO/g, "MINERAGRAFICOS")
+            .replace(/FOTOGRAFICOS/g, "PETROGRAFICOS")
 
             .replace(/MINERA GRAFICO/g, "MINERAGRAFICOS")
             .replace(/MINERA GRAFICOS/g, "MINERAGRAFICOS")
-            .replace(/MINERAGRAFICO/g, "MINERAGRAFICOS")
-            .replace(/MINERAGRAFICOS/g, "MINERAGRAFICOS")
-            .replace(/MINERAGRAFICOS/g, "MINERAGRAFICOS")
-            .replace(/MINERAGRAFICO/g, "MINERAGRAFICOS")
+            .replace(/MUERAGRAFICO/g, "MINERAGRAFICOS")
+            .replace(/MUERAGRAFICOS/g, "MINERAGRAFICOS")
 
             .replace(/PETRO MINERA GRAFICO/g, "PETROMINERAGRAFICOS")
             .replace(/PETRO MINERA GRAFICOS/g, "PETROMINERAGRAFICOS")
-            .replace(/PETROMINERAGRAFICO/g, "PETROMINERAGRAFICOS")
-            .replace(/PETROMINERAGRAFICOS/g, "PETROMINERAGRAFICOS");
 
-        let caracteristicas = [];
+            .replace(/\bPETROGRAFICOS?\b/g, "PETROGRAFICOS")
+            .replace(/\bMINERAGRAFICOS?\b/g, "MINERAGRAFICOS")
+            .replace(/\bPETROMINERAGRAFICOS?\b/g, "PETROMINERAGRAFICOS");
 
-        if (texto.includes("PETROGRAFICOS")) {
 
-            const [rows] = await db.execute(
-                "SELECT caracteristicas FROM tipos_estudio WHERE nombre='PETROGRAFICOS'"
-            );
+const [rows] = await db.execute(
+    "SELECT caracteristicas FROM tipos_estudio WHERE nombre = ?",
+    [texto]
+);
 
-            if (rows.length)
-                caracteristicas.push(rows[0].caracteristicas);
 
-        }
+let caracteristicas = [];
 
-        if (texto.includes("MINERAGRAFICOS")) {
-
-            const [rows] = await db.execute(
-                "SELECT caracteristicas FROM tipos_estudio WHERE nombre='MINERAGRAFICOS'"
-            );
-
-            if (rows.length)
-                caracteristicas.push(rows[0].caracteristicas);
-
-        }
-
-        if (texto.includes("PETROMINERAGRAFICOS")) {
-
-            const [rows] = await db.execute(
-                "SELECT caracteristicas FROM tipos_estudio WHERE nombre='PETROMINERAGRAFICOS'"
-            );
-
-            if (rows.length)
-                caracteristicas.push(rows[0].caracteristicas);
-
-        }
+if (rows.length > 0) {
+    caracteristicas.push(rows[0].caracteristicas);
+}
 
         res.json({
             ok: true,

@@ -1,4 +1,5 @@
 let textoCaracteristicas = "";
+let temporizadorBusqueda;
 
 async function guardarIntroduccion() {
 
@@ -100,9 +101,7 @@ async function generarIntroduccion(){
 
     }
 
-    textoCaracteristicas = `El presente análisis técnico tiene como objetivo determinar ${datos.caracteristicas.join(", ")}, incluyendo la identificación de alteraciones y reemplazamiento.
-
-Mediante esta evaluación, se garantiza la identificación de especies minerales para las distintas evaluaciones geológicas y posibles estudios geometalúrgicos. Cabe precisar que el material analizado ha sido proporcionado íntegramente por el cliente para los fines de diagnóstico e investigación anteriormente descritos.`;
+    textoCaracteristicas = datos.caracteristicas[0];
 
 actualizarIntroduccionGenerada();
 
@@ -268,10 +267,6 @@ function actualizarTituloMuestras(){
 document
     .getElementById("btnGuardar")
     .addEventListener("click", guardarIntroduccion);
-
-document
-.getElementById("tipoEstudio")
-.addEventListener("input", generarIntroduccion);
 document
 .getElementById("tipoEstudio")
 .addEventListener("input", actualizarTituloEstudios);
@@ -301,8 +296,15 @@ document
 .addEventListener("input", () => {
 
     actualizarIntroduccionGenerada();
-    generarIntroduccion();
     actualizarTituloEstudios();
+
+    clearTimeout(temporizadorBusqueda);
+
+    temporizadorBusqueda = setTimeout(() => {
+
+        generarIntroduccion();
+
+    }, 500);
 
 });
 

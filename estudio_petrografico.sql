@@ -56,6 +56,28 @@ VALUES
 
 USE estudio_petrografico;
 
+UPDATE tipos_estudio
+SET caracteristicas = 'El presente estudio petrográfico tiene como finalidad caracterizar los minerales no metálicos de la muestra. 
+Para ello, se desarrollará una descripción macroscópica y microscópica que abarca la asociación mineral, los tipos de textura, las alteraciones, 
+los reemplazamientos, así como el tamaño y la abundancia de los minerales. Además, se incluirá la síntesis microscópica, una tabla de alteraciones, 
+la distribución, los estilos de mineralización y la descripción de las microfotografías.'
+WHERE nombre = 'PETROGRAFICOS';
+
+UPDATE tipos_estudio
+SET caracteristicas = 'El presente estudio mineragráfico tiene como finalidad caracterizar los minerales metálicos de la muestra. 
+Para ello, se desarrollará una descripción que abarca la asociación mineral, los tipos de textura, los reemplazamientos, 
+así como el tamaño y la abundancia de los minerales. Además, se incluirán estilos de mineralización, 
+secuencia paragenética y la descripción de las microfotografías.'
+WHERE nombre = 'MINERAGRAFICOS';
+
+UPDATE tipos_estudio
+SET caracteristicas = 'El presente estudio petromineragráfico tiene como finalidad caracterizar los minerales metálicos y no metálicos 
+de la muestra. Para ello, se desarrollará una descripción macroscópica y microscópica que abarca la asociación mineral, 
+los tipos de textura, las alteraciones, los reemplazamientos, así como el tamaño y la abundancia de los minerales. 
+Además, se incluirá la síntesis microscópica, una tabla de alteraciones, la distribución, los estilos de mineralización, 
+secuencia paragenética y la descripción de las microfotografías.'
+WHERE nombre = 'PETROMINERAGRAFICOS';
+
 CREATE TABLE caracterizacion_mineralogica (
 
     id INT AUTO_INCREMENT PRIMARY KEY,
