@@ -1,3 +1,5 @@
+let textoCaracteristicas = "";
+
 async function guardarIntroduccion() {
 
     const datos = {
@@ -54,6 +56,8 @@ async function generarIntroduccion(){
 
     if(estudios.trim()===""){
 
+        textoCaracteristicas = "";
+
         document.getElementById(
             "introduccionGenerada"
         ).textContent="";
@@ -86,6 +90,7 @@ async function generarIntroduccion(){
 
     const datos =
         await respuesta.json();
+    console.log("CARACTERISTICAS:", datos.caracteristicas);
 
     console.log(datos);
 
@@ -95,20 +100,35 @@ async function generarIntroduccion(){
 
     }
 
-    const texto=
-
-`El presente análisis técnico tiene como objetivo determinar ${datos.caracteristicas.join(", ")}, incluyendo la identificación de alteraciones y reemplazamiento.
+    textoCaracteristicas = `El presente análisis técnico tiene como objetivo determinar ${datos.caracteristicas.join(", ")}, incluyendo la identificación de alteraciones y reemplazamiento.
 
 Mediante esta evaluación, se garantiza la identificación de especies minerales para las distintas evaluaciones geológicas y posibles estudios geometalúrgicos. Cabe precisar que el material analizado ha sido proporcionado íntegramente por el cliente para los fines de diagnóstico e investigación anteriormente descritos.`;
 
-    document.getElementById(
-    "introduccionGenerada"
-).textContent =
-
-`A requerimiento del ${document.getElementById("requerimiento").value} 
-de la empresa ${document.getElementById("empresa").value}, se han realizado estudios ${document.getElementById("tipoEstudio").value} de la muestra ${document.getElementById("muestra").value}.`;
+actualizarIntroduccionGenerada();
 
     }
+
+function actualizarIntroduccionGenerada(){
+
+    const requerimiento =
+    document.getElementById("requerimiento").value;
+
+    const empresa =
+    document.getElementById("empresa").value;
+
+    const estudios =
+    document.getElementById("tipoEstudio").value;
+
+    const muestra =
+    document.getElementById("muestra").value;
+
+    document.getElementById("introduccionGenerada").textContent =
+
+`A requerimiento de ${requerimiento} de la empresa ${empresa}, se han realizado estudios ${estudios} de la muestra de ${muestra}.
+
+${textoCaracteristicas}`;
+
+}
 
 function limpiarFormulario(){
 
@@ -202,24 +222,22 @@ function llenarCampo(campo,valor){
 
     },800);
 
-    if(campo==="tipoEstudio"){
-
-        generarIntroduccion();
-
-    }
-
     if(
 
-        document.getElementById("requerimiento").value &&
-        document.getElementById("empresa").value &&
-        document.getElementById("tipoEstudio").value &&
-        document.getElementById("muestra").value
+        document.getElementById("requerimiento").value.trim() !== "" &&
+        document.getElementById("empresa").value.trim() !== "" &&
+        document.getElementById("tipoEstudio").value.trim() !== "" &&
+        document.getElementById("muestra").value.trim() !== ""
 
     ){
 
         generarIntroduccion();
 
-}
+    }else{
+
+        document.getElementById("introduccionGenerada").textContent = "";
+
+    }
 
 }
 
@@ -264,20 +282,35 @@ document
 
 document
 .getElementById("requerimiento")
-.addEventListener("input",generarIntroduccion);
+.addEventListener("input", () => {
+
+    actualizarIntroduccionGenerada();
+
+});
 
 document
 .getElementById("empresa")
-.addEventListener("input",generarIntroduccion);
+.addEventListener("input", () => {
+
+    actualizarIntroduccionGenerada();
+
+});
 
 document
 .getElementById("tipoEstudio")
-.addEventListener("input",()=>{
+.addEventListener("input", () => {
 
+    actualizarIntroduccionGenerada();
     generarIntroduccion();
+    actualizarTituloEstudios();
 
 });
 
 document
 .getElementById("muestra")
-.addEventListener("input",generarIntroduccion);
+.addEventListener("input", () => {
+
+    actualizarTituloMuestras();
+    actualizarIntroduccionGenerada();
+
+});
