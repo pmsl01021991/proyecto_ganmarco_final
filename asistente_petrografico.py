@@ -219,14 +219,41 @@ def iniciar_jarvis():
 
             texto = reconocer_con_vosk(audio)
             texto = texto.lower()
+            # ==========================
+            # PETROGRAFICOS
+            # ==========================
+
             texto = texto.replace("petro gráficos", "petrograficos")
             texto = texto.replace("petro gráfico", "petrografico")
+            texto = texto.replace("pedro gráficos", "petrograficos")
+            texto = texto.replace("pedro gráfico", "petrografico")
+            texto = texto.replace("petro graficos", "petrograficos")
+            texto = texto.replace("petro grafico", "petrografico")
+
+            # ==========================
+            # MINERAGRAFICOS
+            # ==========================
 
             texto = texto.replace("minera gráficos", "mineragraficos")
             texto = texto.replace("minera gráfico", "mineragrafico")
+            texto = texto.replace("minero gráficos", "mineragraficos")
+            texto = texto.replace("minero gráfico", "mineragrafico")
+            texto = texto.replace("ninera gráficos", "mineragraficos")
+            texto = texto.replace("ninera graficos", "mineragraficos")
+            texto = texto.replace("ni nera graficos", "mineragraficos")
+            texto = texto.replace("minera graficos", "mineragraficos")
+            texto = texto.replace("minera grafico", "mineragrafico")
+
+            # ==========================
+            # PETROMINERAGRAFICOS
+            # ==========================
 
             texto = texto.replace("petro minera gráficos", "petromineragraficos")
             texto = texto.replace("petro minera gráfico", "petromineragrafico")
+            texto = texto.replace("petrominera gráficos", "petromineragraficos")
+            texto = texto.replace("petrominera gráfico", "petromineragrafico")
+            texto = texto.replace("petro minera graficos", "petromineragraficos")
+            texto = texto.replace("petro minera grafico", "petromineragrafico")
 
             texto = texto.replace("hombre ", "nombre ")
             texto = texto.replace("cinco doce", "cincuenta y dos")

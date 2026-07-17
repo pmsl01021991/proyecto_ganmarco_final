@@ -1,6 +1,47 @@
 let textoCaracteristicas = "";
 let temporizadorBusqueda;
 
+function normalizarTipoEstudio(texto){
+
+    texto = texto
+        .toUpperCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .replace(/[.,;:¡!¿?]/g,"")
+        .replace(/\s+/g," ")
+        .trim();
+
+    const equivalencias = {
+
+        "PETRO GRAFICO":"PETROGRAFICOS",
+        "PETRO GRAFICOS":"PETROGRAFICOS",
+        "PETROGRAFICO":"PETROGRAFICOS",
+        "PETROGRAFICOS":"PETROGRAFICOS",
+        "PEDRO GRAFICO":"PETROGRAFICOS",
+        "PEDRO GRAFICOS":"PETROGRAFICOS",
+        "FOTOGRAFICO":"PETROGRAFICOS",
+        "FOTOGRAFICOS":"PETROGRAFICOS",
+
+        "MINERA GRAFICO":"MINERAGRAFICOS",
+        "MINERA GRAFICOS":"MINERAGRAFICOS",
+        "MINERAGRAFICO":"MINERAGRAFICOS",
+        "MINERAGRAFICOS":"MINERAGRAFICOS",
+        "MINERO GRAFICO":"MINERAGRAFICOS",
+        "MINERO GRAFICOS":"MINERAGRAFICOS",
+        "NINERA GRAFICOS":"MINERAGRAFICOS",
+        "MUERAGRAFICOS":"MINERAGRAFICOS",
+
+        "PETRO MINERA GRAFICO":"PETROMINERAGRAFICOS",
+        "PETRO MINERA GRAFICOS":"PETROMINERAGRAFICOS",
+        "PETROMINERAGRAFICO":"PETROMINERAGRAFICOS",
+        "PETROMINERAGRAFICOS":"PETROMINERAGRAFICOS"
+
+    };
+
+    return equivalencias[texto] || texto;
+
+}
+
 async function guardarIntroduccion() {
 
     const datos = {
@@ -51,8 +92,11 @@ async function guardarIntroduccion() {
 
 async function generarIntroduccion(){
 
-    const estudios =
-        document.getElementById("tipoEstudio").value;
+     console.log("ENTRÓ A generarIntroduccion");
+
+    const estudios = normalizarTipoEstudio(
+            document.getElementById("tipoEstudio").value
+        );
         console.log("Estudios:", estudios);
 
     if(estudios.trim()===""){
@@ -109,6 +153,8 @@ actualizarIntroduccionGenerada();
 
 function actualizarIntroduccionGenerada(){
 
+    console.log("ACTUALIZANDO INTRODUCCIÓN");
+
     const requerimiento =
     document.getElementById("requerimiento").value;
 
@@ -154,72 +200,39 @@ function limpiarFormulario(){
     document.getElementById("tituloMuestras").textContent =
         "MUESTRAS";
 
-    document.getElementById("txtRequerimiento").textContent = "__________";
-    document.getElementById("txtEmpresa").textContent = "__________";
-    document.getElementById("txtEstudio").textContent = "__________";
-    document.getElementById("txtMuestra").textContent = "__________";
+    
 
 }
 
-function llenarCampo(campo,valor){
+function llenarCampo(campo, valor){
 
-    const elemento =
-        document.getElementById(campo);
+    console.log("LLENAR CAMPO:", campo, valor);
+
+    const elemento = document.getElementById(campo);
 
     if(!elemento) return;
 
-    elemento.value=valor;
+    elemento.value = valor;
 
-        switch(campo){
-
-        case "requerimiento":
-
-            document.getElementById("txtRequerimiento").textContent = valor;
-
-        break;
-
-        case "empresa":
-
-            document.getElementById("txtEmpresa").textContent = valor;
-
-        break;
-
-        case "tipoEstudio":
-
-            document.getElementById("txtEstudio").textContent = valor;
-
-        break;
-
-        case "muestra":
-
-            document.getElementById("txtMuestra").textContent = valor;
-
-        break;
-
-    }
-    if(campo==="tipoEstudio"){
+    if(campo === "tipoEstudio"){
 
         actualizarTituloEstudios();
 
     }
 
-    if(campo==="muestra"){
+    if(campo === "muestra"){
 
         actualizarTituloMuestras();
 
     }
 
-    elemento.classList.add(
-        "campo-actualizado"
-    );
+    elemento.classList.add("campo-actualizado");
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
-        elemento.classList.remove(
-            "campo-actualizado"
-        );
+        elemento.classList.remove("campo-actualizado");
 
-    },800);
+    }, 800);
 
     if(
 

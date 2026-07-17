@@ -78,6 +78,17 @@ Además, se incluirá la síntesis microscópica, una tabla de alteraciones, la 
 secuencia paragenética y la descripción de las microfotografías.'
 WHERE nombre = 'PETROMINERAGRAFICOS';
 
+SELECT nombre
+FROM tipos_estudio;
+
+SELECT *
+FROM tipos_estudio
+WHERE nombre LIKE '%PETRO%';
+
+SELECT caracteristicas
+FROM tipos_estudio
+WHERE nombre = 'PETROMINERAGRAFICOSSSS'
+
 CREATE TABLE caracterizacion_mineralogica (
 
     id INT AUTO_INCREMENT PRIMARY KEY,

@@ -80,6 +80,47 @@ function normalizarTexto(texto){
 
 }
 
+function normalizarTipoEstudio(texto){
+
+    texto = texto
+        .toUpperCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .replace(/[.,;:¡!¿?]/g,"")
+        .replace(/\s+/g," ")
+        .trim();
+
+    const equivalencias = {
+
+        "PETRO GRAFICO":"PETROGRAFICOS",
+        "PETRO GRAFICOS":"PETROGRAFICOS",
+        "PETROGRAFICO":"PETROGRAFICOS",
+        "PETROGRAFICOS":"PETROGRAFICOS",
+        "PEDRO GRAFICO":"PETROGRAFICOS",
+        "PEDRO GRAFICOS":"PETROGRAFICOS",
+        "FOTOGRAFICO":"PETROGRAFICOS",
+        "FOTOGRAFICOS":"PETROGRAFICOS",
+
+        "MINERA GRAFICO":"MINERAGRAFICOS",
+        "MINERA GRAFICOS":"MINERAGRAFICOS",
+        "MINERAGRAFICO":"MINERAGRAFICOS",
+        "MINERAGRAFICOS":"MINERAGRAFICOS",
+        "MINERO GRAFICO":"MINERAGRAFICOS",
+        "MINERO GRAFICOS":"MINERAGRAFICOS",
+        "NINERA GRAFICOS":"MINERAGRAFICOS",
+        "MUERAGRAFICOS":"MINERAGRAFICOS",
+
+        "PETRO MINERA GRAFICO":"PETROMINERAGRAFICOS",
+        "PETRO MINERA GRAFICOS":"PETROMINERAGRAFICOS",
+        "PETROMINERAGRAFICO":"PETROMINERAGRAFICOS",
+        "PETROMINERAGRAFICOS":"PETROMINERAGRAFICOS"
+
+    };
+
+    return equivalencias[texto] || texto;
+
+}
+
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
@@ -347,41 +388,14 @@ app.post("/obtener-caracteristicas", async (req, res) => {
 
         let { tipoEstudio } = req.body;
 
-        let texto = tipoEstudio
-            .toUpperCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[.,]/g, "");
-            texto = texto
-            .replace(/[¡!¿?:;]/g, "")
-            .replace(/\s+/g, " ")
-            .trim();
+        let texto = normalizarTipoEstudio(tipoEstudio);
 
-        texto = texto
-            .replace(/PETRO GRAFICO/g, "PETROGRAFICOS")
-            .replace(/PETRO GRAFICOS/g, "PETROGRAFICOS")
-            .replace(/PEDRO GRAFICO/g, "PETROGRAFICOS")
-            .replace(/PEDROGRAFICO/g, "PETROGRAFICOS")
-            .replace(/PEDROGRAFICOS/g, "PETROGRAFICOS")
-            .replace(/FOTOGRAFICO/g, "PETROGRAFICOS")
-            .replace(/FOTOGRAFICOS/g, "PETROGRAFICOS")
-
-            .replace(/MINERA GRAFICO/g, "MINERAGRAFICOS")
-            .replace(/MINERA GRAFICOS/g, "MINERAGRAFICOS")
-            .replace(/MUERAGRAFICO/g, "MINERAGRAFICOS")
-            .replace(/MUERAGRAFICOS/g, "MINERAGRAFICOS")
-
-            .replace(/PETRO MINERA GRAFICO/g, "PETROMINERAGRAFICOS")
-            .replace(/PETRO MINERA GRAFICOS/g, "PETROMINERAGRAFICOS")
-
-            .replace(/\bPETROGRAFICOS?\b/g, "PETROGRAFICOS")
-            .replace(/\bMINERAGRAFICOS?\b/g, "MINERAGRAFICOS")
-            .replace(/\bPETROMINERAGRAFICOS?\b/g, "PETROMINERAGRAFICOS");
+        const textoBusqueda = texto.replace(/\s+\d+$/, "");
 
 
 const [rows] = await db.execute(
     "SELECT caracteristicas FROM tipos_estudio WHERE nombre = ?",
-    [texto]
+    [textoBusqueda]
 );
 
 
