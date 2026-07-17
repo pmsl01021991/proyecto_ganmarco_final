@@ -1,15 +1,28 @@
 import speech_recognition as sr
-import subprocess
-import winsound
 import os
 import requests
-import uuid
 import sys
 import time
 import threading
-
+import asyncio
+import edge_tts
+import pygame
+import unicodedata
 from interfaz_jarvis import InterfazJarvisAnimada
-from vosk_local import reconocer_con_vosk
+
+def normalizar_texto(texto):
+
+    texto = texto.lower()
+
+    texto = ''.join(
+
+        c for c in unicodedata.normalize("NFD", texto)
+
+        if unicodedata.category(c) != "Mn"
+
+    )
+
+    return texto
 
 escuchando = True
 microfono_bloqueado = False
@@ -26,9 +39,14 @@ ACTIVADORES = (
 )
 
 recognizer = sr.Recognizer()
+
+pygame.mixer.init()
+
 recognizer.energy_threshold = 300
 recognizer.dynamic_energy_threshold = True
 recognizer.pause_threshold = 2.2
+recognizer.non_speaking_duration = 0.3
+recognizer.operation_timeout = 5
 
 SERVIDOR_GEOPILOT = "http://localhost:3000/procesar-voz"
 
@@ -43,37 +61,39 @@ def recurso(ruta_relativa):
 
 
 def hablar(texto, mostrar=False):
+
     if mostrar:
-        print("Jarvis:", texto)
+        print("GeoPilot:", texto)
 
-    archivo_salida = f"voz_{uuid.uuid4()}.wav"
+    asyncio.run(_hablar(texto))
 
-    comando = [
-        PIPER_EXE,
-        "--model", PIPER_MODEL,
-        "--output_file", archivo_salida
-    ]
 
-    startupinfo = subprocess.STARTUPINFO()
-    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+async def _hablar(texto):
 
-    subprocess.run(
-        comando,
-        input=texto,
-        text=True,
-        encoding="utf-8",
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-        startupinfo=startupinfo,
-        creationflags=subprocess.CREATE_NO_WINDOW
+    archivo = "voz.mp3"
+
+    communicate = edge_tts.Communicate(
+
+        text=texto,
+
+        voice="es-PE-CamilaNeural",
+
+        rate="+20%"
+
     )
 
-    winsound.PlaySound(archivo_salida, winsound.SND_FILENAME)
-    if os.path.exists(archivo_salida):
-        os.remove(archivo_salida)
-        
-PIPER_EXE = recurso(r"piper_windows_amd64\piper\piper.exe")
-PIPER_MODEL = recurso(r"piper_windows_amd64\piper\voices\es_ES-davefx-medium.onnx")
+    await communicate.save(archivo)
+
+    pygame.mixer.music.load(archivo)
+    pygame.mixer.music.play()
+
+    while pygame.mixer.music.get_busy():
+        await asyncio.sleep(0.01)
+
+    pygame.mixer.music.unload()
+
+    if os.path.exists(archivo):
+        os.remove(archivo)
 
 
 def desactivar_microfono():
@@ -136,16 +156,16 @@ def enviar_a_formulario(texto):
 def ejecutar_comando(comando):
     comando = comando.lower()
 
-    if "desactiva el micrófono" in comando or \
-       "apaga el micrófono" in comando or \
-       "desactivar micrófono" in comando:
+    if "desactiva el microfono" in comando or \
+       "apaga el microfono" in comando or \
+       "desactivar microfono" in comando:
 
         desactivar_microfono()
         return
 
-    elif "activa el micrófono" in comando or \
-         "activar el micrófono" in comando or \
-         "enciende el micrófono" in comando:
+    elif "activa el microfono" in comando or \
+         "activar el microfono" in comando or \
+         "enciende el microfono" in comando:
 
         activar_microfono()
         return
@@ -190,7 +210,15 @@ def iniciar_jarvis():
                             phrase_time_limit=3
                         )
 
-                        texto_activador = reconocer_con_vosk(audio).lower()
+                        try:
+                            texto_activador = normalizar_texto(
+                                recognizer.recognize_google(
+                                    audio,
+                                    language="es-PE"
+                                )
+                            )
+                        except:
+                            texto_activador = ""
                         print("Activador:", texto_activador)
 
                         if any(a in texto_activador for a in ACTIVADORES):
@@ -217,8 +245,19 @@ def iniciar_jarvis():
                 proxima_escucha_larga = False
                 recognizer.pause_threshold = 2.2
 
-            texto = reconocer_con_vosk(audio)
-            texto = texto.lower()
+            try:
+                texto = normalizar_texto(
+                    recognizer.recognize_google(
+                        audio,
+                        language="es-PE"
+                    )
+                )
+
+            except sr.UnknownValueError:
+                texto = ""
+
+            except sr.RequestError:
+                texto = ""
             # ==========================
             # PETROGRAFICOS
             # ==========================
