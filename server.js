@@ -1,12 +1,11 @@
 import express from "express";
 import cors from "cors";
-import mysql from "mysql2/promise";
+import sqlite3 from "sqlite3";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const app = express();
 
 app.use(cors());
@@ -121,14 +120,18 @@ function normalizarTipoEstudio(texto){
 
 }
 
-const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "1234",
-  database: "estudio_petrografico",
-  waitForConnections: true,
-  connectionLimit: 10
-});
+const db = new sqlite3.Database(
+    path.join(__dirname, "estudio_petrografico.db"),
+    (err) => {
+
+        if (err) {
+            console.error("Error SQLite:", err.message);
+        } else {
+            console.log("SQLite conectado.");
+        }
+
+    }
+);
 
 app.post("/guardar-introduccion", async (req, res) => {
 
@@ -142,26 +145,42 @@ app.post("/guardar-introduccion", async (req, res) => {
             textoIntroduccion
         } = req.body;
 
-        await db.execute(
-            `
-            INSERT INTO introduccion_informe
-            (
-                requerimiento,
-                empresa,
-                tipoEstudio,
-                muestra,
-                textoIntroduccion
-            )
-            VALUES (?, ?, ?, ?, ?)
-            `,
-            [
-                requerimiento,
-                empresa,
-                tipoEstudio,
-                muestra,
-                textoIntroduccion
-            ]
-        );
+        await new Promise((resolve, reject) => {
+
+            db.run(
+
+                `
+                INSERT INTO introduccion_informe
+                (
+                    requerimiento,
+                    empresa,
+                    tipoEstudio,
+                    muestra,
+                    textoIntroduccion
+                )
+                VALUES (?, ?, ?, ?, ?)
+                `,
+
+                [
+                    requerimiento,
+                    empresa,
+                    tipoEstudio,
+                    muestra,
+                    textoIntroduccion
+                ],
+
+                function(err){
+
+                    if(err)
+                        reject(err);
+                    else
+                        resolve();
+
+                }
+
+            );
+
+        });
 
         res.json({
             ok:true
@@ -186,14 +205,30 @@ app.get("/buscar-introduccion/:id", async (req, res) => {
 
         const id = req.params.id;
 
-        const [rows] = await db.execute(
-            `
-            SELECT *
-            FROM introduccion_informe
-            WHERE id = ?
-            `,
-            [id]
-        );
+        const rows = await new Promise((resolve, reject) => {
+
+            db.all(
+
+                `
+                SELECT *
+                FROM introduccion_informe
+                WHERE id = ?
+                `,
+
+                [id],
+
+                (err, rows) => {
+
+                    if(err)
+                        reject(err);
+                    else
+                        resolve(rows);
+
+                }
+
+            );
+
+        });
 
         if(rows.length === 0){
 
@@ -392,19 +427,32 @@ app.post("/obtener-caracteristicas", async (req, res) => {
 
         const textoBusqueda = texto.replace(/\s+\d+$/, "");
 
+const rows = await new Promise((resolve, reject) => {
 
-const [rows] = await db.execute(
-    "SELECT caracteristicas FROM tipos_estudio WHERE nombre = ?",
-    [textoBusqueda]
-);
+    db.all(
 
+        "SELECT caracteristicas FROM tipos_estudio WHERE nombre = ?",
+
+        [textoBusqueda],
+
+        (err, rows) => {
+
+            if(err)
+                reject(err);
+            else
+                resolve(rows);
+
+        }
+
+    );
+
+});
 
 let caracteristicas = [];
 
 if (rows.length > 0) {
     caracteristicas.push(rows[0].caracteristicas);
 }
-
         res.json({
             ok: true,
             caracteristicas

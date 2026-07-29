@@ -26,8 +26,8 @@ startupinfo = subprocess.STARTUPINFO()
 startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
 subprocess.Popen(
-    ["node", recurso("server.js")],
-    cwd=BASE_DIR,
+    [recurso(r"node\node.exe"), recurso("server.js")],
+    cwd=os.path.dirname(recurso("server.js")),
     stdout=None,
     stderr=None,
     startupinfo=startupinfo,

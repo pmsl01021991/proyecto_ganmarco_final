@@ -1,7 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 from PyInstaller.utils.hooks import collect_all
 
-datas = [('jarvis4.gif', '.'), ('WhatsApp Image 2026-06-15 at 7.24.25 PM.jpeg', '.'), ('Logo_Proyect.png', '.'), ('server.js', '.'), ('package.json', '.'), ('index.html', '.'), ('componentes', 'componentes'), ('css', 'css'), ('js', 'js'), ('interfaz_jarvis.py', '.')]
+datas = [('jarvis4.gif', '.'), ('WhatsApp Image 2026-06-15 at 7.24.25 PM.jpeg', '.'), ('Logo_Proyect.png', '.'), ('server.js', '.'), ('package.json', '.'), ('index.html', '.'), ('estudio_petrografico.db', '.'), ('componentes', 'componentes'), ('css', 'css'), ('js', 'js'), ('node', 'node'), ('node_modules', 'node_modules')]
 binaries = []
 hiddenimports = []
 tmp_ret = collect_all('PIL')
