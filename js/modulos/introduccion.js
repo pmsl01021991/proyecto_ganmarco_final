@@ -113,9 +113,7 @@ async function generarIntroduccion(){
                 })
 
             }
-        );
-
-        
+        );        
 
     const datos =
         await respuesta.json();
