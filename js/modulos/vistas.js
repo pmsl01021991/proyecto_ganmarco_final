@@ -1,4 +1,4 @@
-function mostrarVista(vista){
+async function mostrarVista(vista){
 
     //==========================
     // VISTAS
@@ -125,13 +125,34 @@ function mostrarVista(vista){
 
         case "microscopica":
 
-            vistaMicroscopica.style.display="block";
+            await cargarVistaMicroscopica();
+
+            vistaMicroscopica.style.display = "block";
 
         break;
 
-    }
+            }
 
        
+
+}
+
+let vistaMicroscopicaCargada = false;
+
+async function cargarVistaMicroscopica() {
+
+    if (vistaMicroscopicaCargada) return;
+
+    const contenedor =
+    document.getElementById("vistaMicroscopica");
+
+    const respuesta =
+    await fetch("data_informe.html");
+
+    contenedor.innerHTML =
+    await respuesta.text();
+
+    vistaMicroscopicaCargada = true;
 
 }
 

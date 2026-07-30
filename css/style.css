@@ -258,17 +258,24 @@ ALTURA UNIFICADA DE LAS VISTAS
 
 }
 
-.iframeModulo{
+#vistaMicroscopica .card{
 
-    width:100%;
+    height:780px;
 
-    height:900px;
+    overflow-y:auto;
 
-    border:none;
+}
 
-    border-radius:20px;
+#vistaPresentacion .card,
+#vistaContenido .card,
+#vistaIntroduccion .card,
+#vistaCaracterizacion .card,
+#vistaMarco .card,
+#vistaMicroscopica .card{
 
-    background:white;
+    height:780px;
+
+    overflow-y:auto;
 
 }
 
