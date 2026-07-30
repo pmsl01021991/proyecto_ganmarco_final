@@ -7,38 +7,22 @@ function normalizarTipoEstudio(texto){
         .toUpperCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g,"")
-        .replace(/[.,;:¡!¿?]/g,"")
-        .replace(/\s+/g," ")
-        .trim();
+        .replace(/[.,;:¡!¿?]/g," ");
 
-    const equivalencias = {
+    // Corregir nombres separados
+    texto = texto
+        .replace(/PETRO GRAFICOS?/g,"PETROGRAFICOS")
+        .replace(/PEDRO GRAFICOS?/g,"PETROGRAFICOS")
+        .replace(/FOTOGRAFICOS?/g,"PETROGRAFICOS")
 
-        "PETRO GRAFICO":"PETROGRAFICOS",
-        "PETRO GRAFICOS":"PETROGRAFICOS",
-        "PETROGRAFICO":"PETROGRAFICOS",
-        "PETROGRAFICOS":"PETROGRAFICOS",
-        "PEDRO GRAFICO":"PETROGRAFICOS",
-        "PEDRO GRAFICOS":"PETROGRAFICOS",
-        "FOTOGRAFICO":"PETROGRAFICOS",
-        "FOTOGRAFICOS":"PETROGRAFICOS",
+        .replace(/MINERA GRAFICOS?/g,"MINERAGRAFICOS")
+        .replace(/MINERO GRAFICOS?/g,"MINERAGRAFICOS")
+        .replace(/NINERA GRAFICOS?/g,"MINERAGRAFICOS")
+        .replace(/MUERAGRAFICOS/g,"MINERAGRAFICOS")
 
-        "MINERA GRAFICO":"MINERAGRAFICOS",
-        "MINERA GRAFICOS":"MINERAGRAFICOS",
-        "MINERAGRAFICO":"MINERAGRAFICOS",
-        "MINERAGRAFICOS":"MINERAGRAFICOS",
-        "MINERO GRAFICO":"MINERAGRAFICOS",
-        "MINERO GRAFICOS":"MINERAGRAFICOS",
-        "NINERA GRAFICOS":"MINERAGRAFICOS",
-        "MUERAGRAFICOS":"MINERAGRAFICOS",
+        .replace(/PETRO MINERA GRAFICOS?/g,"PETROMINERAGRAFICOS");
 
-        "PETRO MINERA GRAFICO":"PETROMINERAGRAFICOS",
-        "PETRO MINERA GRAFICOS":"PETROMINERAGRAFICOS",
-        "PETROMINERAGRAFICO":"PETROMINERAGRAFICOS",
-        "PETROMINERAGRAFICOS":"PETROMINERAGRAFICOS"
-
-    };
-
-    return equivalencias[texto] || texto;
+    return texto.trim();
 
 }
 
@@ -145,7 +129,7 @@ async function generarIntroduccion(){
 
     }
 
-    textoCaracteristicas = datos.caracteristicas[0];
+    textoCaracteristicas = datos.caracteristicas.join("\n\n");
 
 actualizarIntroduccionGenerada();
 

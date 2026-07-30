@@ -423,47 +423,97 @@ app.post("/obtener-caracteristicas", async (req, res) => {
 
         let { tipoEstudio } = req.body;
 
-        let texto = normalizarTipoEstudio(tipoEstudio);
+        let texto = tipoEstudio
+            .toUpperCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g,"")
+            .replace(/[.,;:¡!¿?]/g," ");
 
-        const textoBusqueda = texto.replace(/\s+\d+$/, "");
+        // ===============================
+        // Detectar estudios presentes
+        // ===============================
 
-const rows = await new Promise((resolve, reject) => {
+        const estudios = [];
 
-    db.all(
+        if (/\bPETROGRAFICOS?\b/.test(texto)) {
+            estudios.push("PETROGRAFICOS");
+        }
 
-        "SELECT caracteristicas FROM tipos_estudio WHERE nombre = ?",
+        if (/\bPETROMINERAGRAFICOS?\b/.test(texto)) {
+            estudios.push("PETROMINERAGRAFICOS");
+        }
 
-        [textoBusqueda],
+        if (/\bMINERAGRAFICOS?\b/.test(texto)) {
+            estudios.push("MINERAGRAFICOS");
+        }
 
-        (err, rows) => {
+        // Eliminar duplicados
+        const lista = [...new Set(estudios)];
 
-            if(err)
-                reject(err);
-            else
-                resolve(rows);
+        // Orden fijo
+        const orden = [
+            "PETROGRAFICOS",
+            "PETROMINERAGRAFICOS",
+            "MINERAGRAFICOS"
+        ];
+
+        lista.sort(
+            (a,b)=>
+            orden.indexOf(a)-orden.indexOf(b)
+        );
+
+        const clave = lista.join("+");
+
+        console.log("CLAVE:", clave);
+
+        const rows = await new Promise((resolve,reject)=>{
+
+            db.all(
+
+                "SELECT caracteristicas FROM tipos_estudio WHERE nombre=?",
+
+                [clave],
+
+                (err,rows)=>{
+
+                    if(err)
+                        reject(err);
+                    else
+                        resolve(rows);
+
+                }
+
+            );
+
+        });
+
+        let caracteristicas = [];
+
+        if(rows.length>0){
+
+            caracteristicas.push(
+                rows[0].caracteristicas
+            );
 
         }
 
-    );
-
-});
-
-let caracteristicas = [];
-
-if (rows.length > 0) {
-    caracteristicas.push(rows[0].caracteristicas);
-}
         res.json({
-            ok: true,
+
+            ok:true,
+
             caracteristicas
+
         });
 
-    } catch (error) {
+    }
+    catch(error){
 
         console.error(error);
 
         res.status(500).json({
-            ok: false
+
+            ok:false
+
         });
 
     }
