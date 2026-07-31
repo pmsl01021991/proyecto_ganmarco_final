@@ -20,7 +20,7 @@ async function mostrarVista(vista){
     document.getElementById("vistaMarco");
 
     const vistaMicroscopica =
-    document.getElementById("vistaMicroscopica");
+    document.getElementById("vistaDataInforme");
 
     //==========================
     // PANELES IZQUIERDOS
@@ -37,6 +37,9 @@ async function mostrarVista(vista){
 
     const formularioIntroduccion =
     document.querySelector(".formularioIntroduccion");
+
+    const panelHerramientasMicroscopica =
+    document.getElementById("panelHerramientasMicroscopica");
 
 
     //==========================
@@ -73,7 +76,12 @@ async function mostrarVista(vista){
 
     if(formularioIntroduccion){
         formularioIntroduccion.style.display = "none";
-}
+    }
+    if(panelHerramientasMicroscopica){
+
+      panelHerramientasMicroscopica.style.display="none";
+
+     } 
 
 
     //==========================
@@ -127,24 +135,23 @@ async function mostrarVista(vista){
 
             await cargarVistaMicroscopica();
 
-            vistaMicroscopica.style.display = "block";
+            await cargarHerramientasMicroscopica();
+
+            vistaMicroscopica.style.display="block";
+
+            panelHerramientasMicroscopica.style.display="block";
 
         break;
-
-            }
-
-       
+            }       
 
 }
 
-let vistaMicroscopicaCargada = false;
-
-async function cargarVistaMicroscopica() {
-
-    if (vistaMicroscopicaCargada) return;
+async function cargarVistaMicroscopica(){
 
     const contenedor =
-    document.getElementById("vistaMicroscopica");
+    document.getElementById("vistaDataInforme");
+
+    if(contenedor.dataset.cargado) return;
 
     const respuesta =
     await fetch("data_informe.html");
@@ -152,7 +159,24 @@ async function cargarVistaMicroscopica() {
     contenedor.innerHTML =
     await respuesta.text();
 
-    vistaMicroscopicaCargada = true;
+    contenedor.dataset.cargado = "true";
+
+}
+
+async function cargarHerramientasMicroscopica(){
+
+    const panel =
+    document.getElementById("panelHerramientasMicroscopica");
+
+    if(panel.dataset.cargado) return;
+
+    const respuesta =
+    await fetch("herramientas_microscopica.html");
+
+    panel.innerHTML =
+    await respuesta.text();
+
+    panel.dataset.cargado = "true";
 
 }
 
